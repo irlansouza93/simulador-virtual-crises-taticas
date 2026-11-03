@@ -4,242 +4,344 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Simulador Virtual de Crises Táticas: Defesa Quântica</title>
+  
+  <!-- Google Fonts: Orbitron, Rajdhani, Share Tech Mono, Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="style.css">
-  <!-- Three.js CDN -->
+
+  <!-- Three.js (WebGL 3D Engine) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <!-- jsPDF CDN for Client-Side PDF Generation -->
+  <!-- jsPDF (Client-Side Official PDF Generation) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 
-  <!-- TOP MILITARY HUD -->
-  <header class="top-hud">
-    <div class="hud-title">
-      <div class="hud-badge">CTEX // UVPR</div>
-      <h1>Simulador de Crises Táticas: Defesa Quântica</h1>
+  <!-- FULLSCREEN 3D BACKGROUND VIEWPORT -->
+  <div id="canvas-container"></div>
+  <div class="scanlines-overlay"></div>
+
+  <!-- TACTICAL TOP HUD BAR -->
+  <header class="tactical-hud-bar">
+    <div class="hud-left">
+      <div class="hud-unit-tag">CÓRTEX // CTEX</div>
+      <div class="hud-mission-label">SALA DE CRISE TÁTICA: DEFESA QUÂNTICA</div>
     </div>
-    <div class="hud-meta">
-      <div><span class="status-dot"></span>SISTEMA: <strong style="color: #00ff88;">ONLINE</strong></div>
-      <div id="hud-clock">00:00:00 ZULU</div>
-      <button id="btn-toggle-sound" class="btn-secondary" style="padding: 4px 10px; font-size: 0.75rem;">🔊 SOM: ON</button>
+    <div class="hud-right">
+      <div class="countdown-box" id="hud-timer">⏱️ T-45:00 CRÍTICO</div>
+      <div id="hud-clock">00:00:00 Z</div>
+      <button id="btn-toggle-sound" class="btn-secondary" style="padding: 4px 10px; font-size: 0.72rem;">🔊 SOM: ON</button>
     </div>
   </header>
 
-  <main class="main-wrapper">
+  <!-- FLOATING TELEMETRY READOUT (BOTTOM BAR) -->
+  <div class="telemetry-floating-hud" id="floating-telemetry-hud" style="display: none;">
+    <div>STATUS: <strong id="tel-status">AGUARDANDO ORDENS</strong></div>
+    <div>ALVO: <strong id="tel-target">ABRIGO SUBTERRÂNEO</strong></div>
+    <div>TELEMETRIA: <strong id="tel-val">EMISSÃO RF: 0.00 dBm</strong></div>
+  </div>
 
-    <!-- SCREEN 1: REGISTRATION / 4 PLAYERS SETUP -->
-    <section id="screen-setup" class="screen active">
-      <div class="setup-container">
-        <div class="setup-header">
-          <h2>Credenciamento da Força-Tarefa (4 Operadores)</h2>
-          <p style="color: var(--text-dim); font-size: 0.9rem;">
-            Cada integrante assume uma função técnica indispensável na tomada de decisão da missão de resgate.
-          </p>
+  <!-- MAIN APPLICATION VIEWPORT -->
+  <div class="app-viewport">
+
+    <!-- ==================== SCREEN 1: ROSTER CREDENTIALS & PIN SETUP ==================== -->
+    <section id="screen-setup" class="screen-view active">
+      <div class="tactical-card" style="max-width: 900px;">
+        <div class="card-title-header">
+          <div>
+            <h2>Credenciamento da Célula Tática (4 Operadores)</h2>
+            <div class="card-subtitle">DISTRIBUIÇÃO DE FUNÇÕES OPERACIONAIS E DEFINIÇÃO DE PIN ANTIFRAUDE INDIVIDUAL</div>
+          </div>
+          <div style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--neon-cyan);">[ FASE 0 // PRONTIDÃO ]</div>
         </div>
 
         <div style="margin-bottom: 20px;">
-          <label style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-cyan);">NOME DA EQUIPE / FORÇA-TAREFA:</label>
-          <input type="text" id="team-name-input" class="form-input" value="FORÇA-TAREFA QUÂNTICA BRASIL" style="margin-top: 4px; font-weight: bold;">
+          <label style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-cyan); letter-spacing: 1px;">
+            DESIGNAÇÃO DA FORÇA-TAREFA / GRUPO DE RESGATE:
+          </label>
+          <input type="text" id="team-name-input" class="seat-input" placeholder="Ex: FORÇA-TAREFA ESCUDO QUÂNTICO" style="font-size: 1rem; font-weight: bold; margin-top: 4px;">
         </div>
 
-        <div class="players-grid">
-          <!-- Player 1 -->
-          <div class="player-card">
-            <h3>Operador 1 <span class="player-role-badge">RECONHECIMENTO &bull; MISSÃO 1</span></h3>
-            <div class="form-group">
-              <label>NOME COMPLETO:</label>
-              <input type="text" id="player-name-0" class="form-input" value="Irlan Pereira de Souza">
+        <!-- 4 Operators Grid (Zero Mocked Data) -->
+        <div class="operator-roster-grid">
+          
+          <!-- Seat 1: Reconnaissance -->
+          <div class="operator-seat-card">
+            <div class="seat-avatar">🦅</div>
+            <div class="seat-callsign">FALCÃO</div>
+            <div class="seat-role">Oficial de Reconhecimento</div>
+            <div class="seat-field">
+              <label>NOME / POSTO:</label>
+              <input type="text" id="p-name-0" class="seat-input" placeholder="Seu nome...">
             </div>
-            <div class="form-group">
-              <label>E-MAIL INSTITUCIONAL:</label>
-              <input type="text" id="player-email-0" class="form-input" value="irlan.souza@eb.mil.br">
+            <div class="seat-field">
+              <label>E-MAIL:</label>
+              <input type="text" id="p-email-0" class="seat-input" placeholder="seu.email@eb.mil.br">
             </div>
-            <div style="font-size: 0.72rem; color: var(--text-dim); margin-top: 4px;">
-              Especialidade: Gravimetria Quântica e Centros NV.
+            <div class="seat-field">
+              <label>PIN DE ACESSO (4 DÍGITOS):</label>
+              <input type="password" id="p-pin-0" class="seat-input pin-field" maxlength="4" placeholder="Ex: 1234">
             </div>
-          </div>
-
-          <!-- Player 2 -->
-          <div class="player-card">
-            <h3>Operador 2 <span class="player-role-badge">NAVEGAÇÃO TÁTICA &bull; MISSÃO 2</span></h3>
-            <div class="form-group">
-              <label>NOME COMPLETO:</label>
-              <input type="text" id="player-name-1" class="form-input" value="Diego Santana Gomes">
-            </div>
-            <div class="form-group">
-              <label>E-MAIL INSTITUCIONAL:</label>
-              <input type="text" id="player-email-1" class="form-input" value="santana.diego@eb.mil.br">
-            </div>
-            <div style="font-size: 0.72rem; color: var(--text-dim); margin-top: 4px;">
-              Especialidade: Navegação Inercial (QINS) e Bússola Atômica.
+            <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 6px;">
+              Especialidade: Gravimetria e Centros NV.
             </div>
           </div>
 
-          <!-- Player 3 -->
-          <div class="player-card">
-            <h3>Operador 3 <span class="player-role-badge">LOGÍSTICA &bull; MISSÃO 3</span></h3>
-            <div class="form-group">
-              <label>NOME COMPLETO:</label>
-              <input type="text" id="player-name-2" class="form-input" value="Edson Jorge dos Santos">
+          <!-- Seat 2: Tactical Navigation -->
+          <div class="operator-seat-card">
+            <div class="seat-avatar">🧭</div>
+            <div class="seat-callsign">SENTINELA</div>
+            <div class="seat-role">Navegação Autônoma</div>
+            <div class="seat-field">
+              <label>NOME / POSTO:</label>
+              <input type="text" id="p-name-1" class="seat-input" placeholder="Seu nome...">
             </div>
-            <div class="form-group">
-              <label>E-MAIL INSTITUCIONAL:</label>
-              <input type="text" id="player-email-2" class="form-input" value="edson.jorge@defesa.gov.br">
+            <div class="seat-field">
+              <label>E-MAIL:</label>
+              <input type="text" id="p-email-1" class="seat-input" placeholder="seu.email@eb.mil.br">
             </div>
-            <div style="font-size: 0.72rem; color: var(--text-dim); margin-top: 4px;">
-              Especialidade: Computação Quântica e Otimização Combinatória.
+            <div class="seat-field">
+              <label>PIN DE ACESSO (4 DÍGITOS):</label>
+              <input type="password" id="p-pin-1" class="seat-input pin-field" maxlength="4" placeholder="Ex: 5678">
+            </div>
+            <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 6px;">
+              Especialidade: Inercial QINS e Bússola Atômica.
             </div>
           </div>
 
-          <!-- Player 4 -->
-          <div class="player-card">
-            <h3>Operador 4 <span class="player-role-badge">GUERRA ELETRÔNICA &bull; MISSÃO 4</span></h3>
-            <div class="form-group">
-              <label>NOME COMPLETO:</label>
-              <input type="text" id="player-name-3" class="form-input" value="Cursista Convidado / Operador 4">
+          <!-- Seat 3: Logistical Optimization -->
+          <div class="operator-seat-card">
+            <div class="seat-avatar">⚡</div>
+            <div class="seat-callsign">ORÁCULO</div>
+            <div class="seat-role">Logística & Otimização</div>
+            <div class="seat-field">
+              <label>NOME / POSTO:</label>
+              <input type="text" id="p-name-2" class="seat-input" placeholder="Seu nome...">
             </div>
-            <div class="form-group">
-              <label>E-MAIL INSTITUCIONAL:</label>
-              <input type="text" id="player-email-3" class="form-input" value="operador4@defesa.gov.br">
+            <div class="seat-field">
+              <label>E-MAIL:</label>
+              <input type="text" id="p-email-2" class="seat-input" placeholder="seu.email@defesa.gov.br">
             </div>
-            <div style="font-size: 0.72rem; color: var(--text-dim); margin-top: 4px;">
-              Especialidade: Distribuição Quântica de Chaves (QKD) e OTP.
+            <div class="seat-field">
+              <label>PIN DE ACESSO (4 DÍGITOS):</label>
+              <input type="password" id="p-pin-2" class="seat-input pin-field" maxlength="4" placeholder="Ex: 9012">
+            </div>
+            <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 6px;">
+              Especialidade: Algoritmos QAOA e Qubits.
             </div>
           </div>
+
+          <!-- Seat 4: Electronic Warfare -->
+          <div class="operator-seat-card">
+            <div class="seat-avatar">🔐</div>
+            <div class="seat-callsign">CIPHER</div>
+            <div class="seat-role">Guerra Eletrônica / Cripto</div>
+            <div class="seat-field">
+              <label>NOME / POSTO:</label>
+              <input type="text" id="p-name-3" class="seat-input" placeholder="Seu nome...">
+            </div>
+            <div class="seat-field">
+              <label>E-MAIL:</label>
+              <input type="text" id="p-email-3" class="seat-input" placeholder="seu.email@defesa.gov.br">
+            </div>
+            <div class="seat-field">
+              <label>PIN DE ACESSO (4 DÍGITOS):</label>
+              <input type="password" id="p-pin-3" class="seat-input pin-field" maxlength="4" placeholder="Ex: 3456">
+            </div>
+            <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 6px;">
+              Especialidade: Distribuição QKD e One-Time Pad.
+            </div>
+          </div>
+
         </div>
 
         <div style="text-align: center;">
-          <button id="btn-start-sim" class="btn-primary" style="padding: 14px 36px; font-size: 1rem;">
-            🚀 INICIAR OPERAÇÃO QUÂNTICA
+          <button id="btn-start-sim" class="btn-tactical" style="padding: 14px 40px;">
+            ⚔️ AUTENTICAR CÉLULA E INICIAR MISSÃO
           </button>
         </div>
       </div>
     </section>
 
-    <!-- SCREEN 2: TACTICAL WAR ROOM & 3D VIEWPORT -->
-    <section id="screen-war-room" class="screen">
-      <div class="war-room-grid">
+    <!-- ==================== SCREEN 2: TACTICAL WAR ROOM (CENTERED FLOW) ==================== -->
+    <section id="screen-war-room" class="screen-view">
+      <div class="tactical-card" style="max-width: 780px;">
         
-        <!-- 3D VIEWPORT (LEFT) -->
-        <div class="viewport-card">
-          <div class="card-hud-header">
-            <div>🛰️ MAPA TOPOGRÁFICO 3D (TEATRO DE OPERAÇÕES)</div>
-            <div style="font-size: 0.72rem; color: var(--text-dim);">SENSOR VOLUMÉTRICO: ATIVO</div>
+        <!-- Header Info -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <div class="mission-stage-badge" id="hud-mission-step-pill">
+            MISSÃO 01 // ETAPA 1 DE 4
           </div>
-          <div id="canvas-container"></div>
-          <div class="viewport-overlay">
-            <div class="telemetry-readout" id="telemetry-active-text">
-              Telemetria: Aguardando varredura inicial de área...
-            </div>
+          <div style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted);">
+            SALA DE CRISE TÁTICA SÍNCRONA
           </div>
         </div>
 
-        <!-- TACTICAL OPERATIONAL CONSOLE (RIGHT) -->
-        <div class="console-card">
-          <!-- Mission Stepper -->
-          <div class="mission-stepper">
-            <div class="step-pill active">M1: ABRIGO</div>
-            <div class="step-pill">M2: NAVEGAÇÃO</div>
-            <div class="step-pill">M3: ROTAS</div>
-            <div class="step-pill">M4: QKD</div>
+        <!-- Active Operator Banner -->
+        <div class="active-seat-banner">
+          <div>
+            <div class="role-text" id="cur-operator-role">OFICIAL DE RECONHECIMENTO</div>
+            <div class="callsign-text" id="cur-operator-callsign">OPERADOR: FALCÃO (Irlan)</div>
           </div>
+          <div class="pin-lock-indicator">🔒 CONTROLE EXCLUSIVO DESTE OPERADOR</div>
+        </div>
 
-          <!-- Active Operator Banner -->
-          <div class="current-operator-banner">
-            <div class="banner-role" id="active-operator-role">OFICIAL DE RECONHECIMENTO</div>
-            <div class="banner-name" id="active-operator-name">Irlan Pereira de Souza</div>
+        <!-- Crisis Scenario Alert Banner -->
+        <div class="crisis-alert-banner">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+            <span style="font-size: 1.2rem;">⚠️</span>
+            <strong id="cur-mission-title">Missão 1: Localizar o Abrigo Subterrâneo Oculto</strong>
           </div>
+          <p id="cur-mission-briefing-text"></p>
+        </div>
 
-          <!-- Mission Briefing -->
-          <div class="mission-briefing">
-            <div class="briefing-alert" id="mission-title-hud">Missão 1: Localizar o Abrigo Subterrâneo Oculto</div>
-            <p id="mission-briefing-text" style="color: var(--text-dim);"></p>
+        <!-- Decision Prompt -->
+        <div style="margin-bottom: 14px;">
+          <div style="font-family: var(--font-sub); font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 10px;" id="cur-mission-prompt">
+            Qual subsistema tático deve ser acionado para contornar esta crise?
           </div>
+          
+          <div class="decision-options-container" id="cur-options-container">
+            <!-- Dynamically populated options cards -->
+          </div>
+        </div>
 
-          <!-- Tactical Options Selection -->
-          <div class="tactical-decision-box">
-            <div class="decision-prompt" id="mission-prompt-text">Qual recurso técnico deve ser ativado?</div>
-            <div class="decision-options" id="options-container">
-              <!-- Dynamically populated -->
+        <!-- Operator PIN Validation Interface (Anti-Fraud) -->
+        <div class="pin-auth-modal" id="pin-auth-container" style="display: none;">
+          <div>
+            <div style="font-family: var(--font-sub); font-weight: 700; font-size: 0.95rem; color: #fff;">
+              CONFIRMAÇÃO DE ASSINATURA TÁTICA DO OPERADOR
+            </div>
+            <div style="font-size: 0.75rem; color: var(--text-muted);">
+              Apenas o operador responsável pode autenticar a decisão para registrar no log oficial.
             </div>
           </div>
-
-          <!-- Feedback & Validation Box -->
-          <div id="decision-feedback" class="feedback-box"></div>
-
-          <!-- Next Button -->
-          <div style="text-align: right; margin-top: auto;">
-            <button id="btn-next-mission" class="btn-primary" style="display: none;">
-              PRÓXIMA MISSÃO »
+          <div style="display: flex; gap: 8px;">
+            <input type="password" id="active-pin-input" class="seat-input" maxlength="4" placeholder="PIN">
+            <button id="btn-validate-pin" class="btn-tactical" style="padding: 8px 16px; font-size: 0.8rem;">
+              AUTENTICAR
             </button>
           </div>
         </div>
 
+        <!-- Animated Feedback Card (Threat / Loss or Quantum Success) -->
+        <div id="cur-decision-feedback" class="feedback-card"></div>
+
+        <!-- Advance Button -->
+        <div style="text-align: right; margin-top: 14px;">
+          <button id="btn-advance-mission" class="btn-tactical" style="display: none;">
+            AVANÇAR PARA A PRÓXIMA FASE »
+          </button>
+        </div>
+
       </div>
     </section>
 
-    <!-- SCREEN 3: MISSION DEBRIEFING & REPORT GENERATOR -->
-    <section id="screen-report" class="screen">
-      <div class="report-container">
+    <!-- ==================== SCREEN 3: HUMANIZED REPORT & CUSTOM OBSERVATIONS ==================== -->
+    <section id="screen-report" class="screen-view">
+      <div class="report-paper">
+        
         <div class="report-header">
-          <h2>Relatório Oficial de Simulação Tática: Defesa Quântica</h2>
-          <div class="sub">Projeto CÓRTEX &bull; UVPR / UEPG / Centro Tecnológico do Exército (CTEx)</div>
-          <div class="sub" style="font-size: 9.5pt; margin-top: 4px;">Curso: Princípios de Tecnologias Quânticas &bull; Módulo 2: Aplicações Quânticas 2.0</div>
+          <h1>Relatório Oficial de Simulação Tática: Defesa Quântica</h1>
+          <div class="rep-sub">Projeto CÓRTEX &bull; UVPR / UEPG / Centro Tecnológico do Exército (CTEx)</div>
+          <div class="rep-sub" style="font-size: 9.5pt;">Módulo 2: Aplicações Quânticas 2.0 &bull; Avaliação Somativa</div>
         </div>
 
-        <table class="report-meta-table">
+        <div class="rep-divider"></div>
+
+        <table class="rep-grid-table">
           <tr>
-            <th>Equipe / Força-Tarefa:</th>
-            <td id="rep-team-name">FORÇA-TAREFA QUÂNTICA BRASIL</td>
-            <th>Data de Conclusão:</th>
-            <td id="rep-date">02/11/2026</td>
+            <th>Célula Tática / Equipe:</th>
+            <td id="rep-out-team-name">FORÇA-TAREFA ESCUDO</td>
+            <th>Tempo Restante:</th>
+            <td id="rep-out-timer">34:12 MIN (SOBREVIDA ASSEGURADA)</td>
           </tr>
           <tr>
             <th>Status Operacional:</th>
-            <td colspan="3"><strong style="color: #0b5e28;">MISSÃO CUMPRIDA COM ÊXITO (100% EFICIÊNCIA QUÂNTICA)</strong></td>
+            <td colspan="3"><strong style="color: #0b5e28;">OPERAÇÃO EXECUTADA COM 100% DE EFICIÊNCIA QUÂNTICA</strong></td>
+          </tr>
+          <tr>
+            <th>Assinatura Criptográfica:</th>
+            <td colspan="3"><code style="font-size: 8.5pt;" id="rep-out-hash">SHA256: 7F4A9E88...VALIDADO_PELOS_4_OPERADORES</code></td>
           </tr>
         </table>
 
-        <h3 style="font-size: 11pt; border-bottom: 1px solid #333; padding-bottom: 3px; margin-bottom: 8px;">Célula Tática de Tomada de Decisão (4 Integrantes):</h3>
-        <table class="report-meta-table" style="margin-bottom: 16px;">
+        <h3 style="font-size: 11pt; border-bottom: 1px solid #333; padding-bottom: 3px; margin: 14px 0 8px 0;">
+          1. Efetivo da Célula Tática e Assinaturas Individuais
+        </h3>
+        <table class="rep-grid-table">
           <thead>
             <tr>
-              <th>Função Tática</th>
-              <th>Operador</th>
+              <th>Callsign / Função</th>
+              <th>Militar / Cursista</th>
               <th>E-mail</th>
+              <th>Status Autenticação</th>
             </tr>
           </thead>
-          <tbody id="rep-operators-table">
+          <tbody id="rep-out-roster-body">
             <!-- Dynamically populated -->
           </tbody>
         </table>
 
-        <h3 style="font-size: 11pt; border-bottom: 1px solid #333; padding-bottom: 3px; margin-bottom: 10px;">Resolução das Quatro Missões e Fundamentação Física:</h3>
-        <div id="rep-missions-summary">
+        <h3 style="font-size: 11pt; border-bottom: 1px solid #333; padding-bottom: 3px; margin: 14px 0 8px 0;">
+          2. Telemetria e Resolução das Quatro Missões Críticas
+        </h3>
+        <div id="rep-out-missions-body">
           <!-- Dynamically populated -->
         </div>
 
-        <div style="font-size: 8.5pt; color: #555; font-style: italic; margin-top: 20px; border-top: 1px solid #ccc; padding-top: 8px; text-align: center;">
-          Documento gerado interativamente pelo Simulador Virtual de Crises Táticas (Disponível no GitHub Pages).
+        <h3 style="font-size: 11pt; border-bottom: 1px solid #333; padding-bottom: 3px; margin: 16px 0 10px 0; color: #0b3d68;">
+          3. Parecer Técnico e Observações Pessoais dos Operadores (Campos Editáveis)
+        </h3>
+        <p style="font-size: 9pt; color: #555; margin-bottom: 10px;">
+          Cada integrante pode registrar abaixo as suas próprias observações, diagnósticos e reflexões sobre a missão antes de exportar o PDF oficial:
+        </p>
+
+        <!-- Custom Humanized Inputs for Each Operator -->
+        <div class="rep-obs-box">
+          <label id="lbl-obs-0">Operador 1 (Reconhecimento / Falcão) — Parecer Técnico:</label>
+          <textarea id="txt-obs-0" class="rep-obs-textarea" placeholder="Registre com suas próprias palavras sua análise da detecção gravimétrica do abrigo e a limitação do radar comum..."></textarea>
         </div>
+
+        <div class="rep-obs-box">
+          <label id="lbl-obs-1">Operador 2 (Navegação / Sentinela) — Parecer Técnico:</label>
+          <textarea id="txt-obs-1" class="rep-obs-textarea" placeholder="Registre com suas próprias palavras sua análise da navegação inercial por átomos frios (QINS) sem sinal de satélite..."></textarea>
+        </div>
+
+        <div class="rep-obs-box">
+          <label id="lbl-obs-2">Operador 3 (Logística / Oráculo) — Parecer Técnico:</label>
+          <textarea id="txt-obs-2" class="rep-obs-textarea" placeholder="Registre com suas próprias palavras sua análise da otimização quântica de rotas frente à explosão combinatória clássica..."></textarea>
+        </div>
+
+        <div class="rep-obs-box">
+          <label id="lbl-obs-3">Operador 4 (Guerra Eletrônica / Cipher) — Parecer Técnico:</label>
+          <textarea id="txt-obs-3" class="rep-obs-textarea" placeholder="Registre com suas próprias palavras sua análise do enlace de criptografia QKD e a frustração do ataque adversário..."></textarea>
+        </div>
+
+        <div style="font-size: 8.5pt; color: #666; font-style: italic; margin-top: 18px; border-top: 1px solid #ccc; padding-top: 8px; text-align: center;">
+          Documento elaborado através do Simulador Virtual de Crises Táticas (Projeto CÓRTEX / UVPR - CTEx).
+        </div>
+
       </div>
 
-      <div class="report-actions">
-        <button id="btn-download-pdf" class="btn-primary">
-          📥 BAIXAR RELATÓRIO EM PDF (jsPDF)
+      <div class="report-action-bar" style="display: flex; justify-content: center; gap: 14px; margin: 24px 0 50px 0;">
+        <button id="btn-export-pdf-official" class="btn-tactical" style="padding: 14px 30px;">
+          📥 EXPORTAR RELATÓRIO OFICIAL EM PDF (jsPDF)
         </button>
-        <button id="btn-print-report" class="btn-secondary">
-          🖨️ IMPRIMIR / SALVAR COMO PDF
+        <button id="btn-print-official" class="btn-secondary" style="padding: 12px 24px;">
+          🖨️ IMPRIMIR DOCUMENTO
         </button>
-        <button id="btn-restart-sim" class="btn-secondary">
-          🔄 REINICIAR SIMULAÇÃO
+        <button id="btn-restart-simulation" class="btn-secondary" style="padding: 12px 24px;">
+          🔄 REINICIAR OPERAÇÃO
         </button>
       </div>
     </section>
 
-  </main>
+  </div>
 
-  <!-- Application Logic -->
+  <!-- Scripts -->
   <script src="audio.js"></script>
   <script src="three-scene.js"></script>
   <script src="app.js"></script>

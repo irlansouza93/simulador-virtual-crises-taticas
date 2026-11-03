@@ -1,15 +1,22 @@
+/* Tactical Military HUD & Cyberpunk UI Design System */
+/* Follows ui-ux-pro-max (hud-sci-fi-fui & dark-mode-oled) & impeccable craft floor */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap');
+
 :root {
-  --bg-primary: #060c15;
-  --bg-card: rgba(10, 22, 38, 0.88);
-  --bg-card-border: #14304f;
-  --accent-cyan: #00e5ff;
-  --accent-green: #00ff88;
-  --accent-amber: #ffb300;
-  --accent-red: #ff2a4b;
-  --text-main: #d8e5f2;
-  --text-dim: #7e9bb8;
-  --font-mono: "Courier New", Courier, monospace;
-  --font-ui: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --bg-deep: #03070d;
+  --bg-card: rgba(6, 14, 26, 0.88);
+  --bg-card-border: #0e3052;
+  --neon-cyan: #00e5ff;
+  --neon-green: #00ff88;
+  --neon-amber: #ffaa00;
+  --neon-red: #ff2a4b;
+  --text-primary: #e6f1fc;
+  --text-muted: #7496ba;
+  --font-hud: 'Orbitron', sans-serif;
+  --font-sub: 'Rajdhani', sans-serif;
+  --font-mono: 'Share Tech Mono', monospace;
+  --font-body: 'Inter', sans-serif;
 }
 
 * {
@@ -19,539 +26,627 @@
 }
 
 body {
-  background-color: var(--bg-primary);
-  color: var(--text-main);
-  font-family: var(--font-ui);
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font-body);
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
   overflow-x: hidden;
-  background-image: 
-    radial-gradient(circle at 50% 0%, rgba(0, 229, 255, 0.08) 0%, transparent 60%),
-    linear-gradient(rgba(0, 229, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 229, 255, 0.02) 1px, transparent 1px);
-  background-size: 100% 100%, 30px 30px, 30px 30px;
+  user-select: none;
 }
 
-/* TOP HUD */
-.top-hud {
+/* 3D BACKGROUND CANVAS (FULLSCREEN) */
+#canvas-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+/* CRT SCANLINES OVERLAY (SUBTLE) */
+.scanlines-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+  background-size: 100% 4px;
+  opacity: 0.45;
+}
+
+/* TOP HUD BAR */
+.tactical-hud-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 52px;
+  background: rgba(3, 8, 16, 0.92);
+  border-bottom: 1px solid var(--bg-card-border);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
-  background: rgba(6, 15, 27, 0.95);
-  border-bottom: 1px solid var(--bg-card-border);
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.6);
-  z-index: 100;
+  padding: 0 24px;
+  z-index: 10;
+  backdrop-filter: blur(8px);
 }
 
-.hud-title {
+.hud-left {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
 }
 
-.hud-badge {
-  background: rgba(0, 229, 255, 0.15);
-  color: var(--accent-cyan);
-  border: 1px solid var(--accent-cyan);
-  padding: 3px 8px;
-  font-size: 0.72rem;
+.hud-unit-tag {
+  font-family: var(--font-hud);
+  font-size: 0.8rem;
+  background: rgba(0, 229, 255, 0.12);
+  color: var(--neon-cyan);
+  border: 1px solid var(--neon-cyan);
+  padding: 4px 10px;
+  letter-spacing: 1.5px;
+}
+
+.hud-mission-label {
+  font-family: var(--font-sub);
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+.hud-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
   font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.countdown-box {
+  background: rgba(255, 42, 75, 0.15);
+  border: 1px solid var(--neon-red);
+  color: var(--neon-red);
+  padding: 4px 12px;
+  border-radius: 2px;
   font-weight: bold;
   letter-spacing: 1px;
+  animation: pulseRed 2s infinite;
 }
 
-.hud-title h1 {
-  font-size: 1.1rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #fff;
+@keyframes pulseRed {
+  0%, 100% { box-shadow: 0 0 6px rgba(255, 42, 75, 0.3); }
+  50% { box-shadow: 0 0 16px rgba(255, 42, 75, 0.7); }
 }
 
-.hud-meta {
-  display: flex;
-  gap: 16px;
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--text-dim);
-}
-
-.status-dot {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent-green);
-  box-shadow: 0 0 8px var(--accent-green);
-  margin-right: 5px;
-  animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
-}
-
-/* MAIN CONTAINER */
-.main-wrapper {
-  flex: 1;
-  padding: 16px 20px;
+/* MAIN VIEWPORT WRAPPER */
+.app-viewport {
+  position: relative;
+  z-index: 5;
+  min-height: 100vh;
+  padding-top: 68px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none; /* Let 3D canvas underneath receive mouse */
 }
 
-/* SCREENS */
-.screen {
+.screen-view {
   display: none;
-  animation: fadeIn 0.3s ease-in-out;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
+  pointer-events: auto; /* Re-enable pointer events for UI cards */
 }
 
-.screen.active {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
+.screen-view.active {
+  display: block;
+  animation: hudFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes hudFadeIn {
+  from { opacity: 0; transform: scale(0.97) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-/* REGISTRATION SCREEN */
-.setup-container {
-  max-width: 850px;
-  margin: 30px auto;
+/* TACTICAL CARD (CORNER BRACKETS [ ]) */
+.tactical-card {
+  position: relative;
   background: var(--bg-card);
   border: 1px solid var(--bg-card-border);
-  padding: 30px;
-  border-radius: 6px;
-  box-shadow: 0 0 30px rgba(0, 229, 255, 0.05);
+  padding: 28px;
+  border-radius: 4px;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.75), inset 0 0 20px rgba(0, 229, 255, 0.04);
 }
 
-.setup-header {
-  text-align: center;
-  margin-bottom: 24px;
+/* Corner Bracket Accents */
+.tactical-card::before, .tactical-card::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: var(--neon-cyan);
+  pointer-events: none;
+}
+.tactical-card::before {
+  top: -1px; left: -1px;
+  border-top: 2px solid var(--neon-cyan);
+  border-left: 2px solid var(--neon-cyan);
+}
+.tactical-card::after {
+  bottom: -1px; right: -1px;
+  border-bottom: 2px solid var(--neon-cyan);
+  border-right: 2px solid var(--neon-cyan);
 }
 
-.setup-header h2 {
-  font-size: 1.4rem;
-  color: var(--accent-cyan);
-  margin-bottom: 6px;
+/* CARD HEADER */
+.card-title-header {
+  border-bottom: 1px solid #143354;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.card-title-header h2 {
+  font-family: var(--font-hud);
+  font-size: 1.25rem;
+  color: var(--neon-cyan);
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  letter-spacing: 1px;
 }
 
-.players-grid {
+.card-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ROSTER / CHARACTER SELECTOR GRID */
+.operator-roster-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   gap: 16px;
   margin-bottom: 24px;
 }
 
-.player-card {
-  background: rgba(14, 30, 52, 0.6);
-  border: 1px solid #1a3c63;
-  padding: 14px 16px;
+.operator-seat-card {
+  background: rgba(8, 18, 34, 0.75);
+  border: 1px solid #163659;
+  padding: 16px;
   border-radius: 4px;
-  border-left: 4px solid var(--accent-cyan);
+  transition: all 0.25s;
+  position: relative;
 }
 
-.player-card h3 {
-  font-size: 0.92rem;
-  color: var(--accent-cyan);
-  margin-bottom: 8px;
+.operator-seat-card:hover {
+  border-color: var(--neon-cyan);
+  background: rgba(12, 26, 48, 0.9);
+}
+
+.seat-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 4px;
+  background: rgba(0, 229, 255, 0.1);
+  border: 1px solid var(--neon-cyan);
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-hud);
+  font-size: 1.4rem;
+  color: var(--neon-cyan);
+  margin-bottom: 12px;
 }
 
-.player-role-badge {
-  font-size: 0.75rem;
-  color: var(--text-dim);
+.seat-callsign {
+  font-family: var(--font-hud);
+  font-size: 0.95rem;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+.seat-role {
   font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--neon-green);
+  margin-bottom: 12px;
+  text-transform: uppercase;
 }
 
-.form-group {
+.seat-field {
   margin-bottom: 8px;
 }
 
-.form-group label {
+.seat-field label {
   display: block;
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  margin-bottom: 3px;
   font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-bottom: 2px;
 }
 
-.form-input {
+.seat-input {
   width: 100%;
   padding: 8px 10px;
-  background: rgba(5, 12, 22, 0.8);
-  border: 1px solid #1e4570;
+  background: rgba(4, 10, 20, 0.95);
+  border: 1px solid #1a3c64;
   color: #fff;
-  border-radius: 3px;
-  font-size: 0.9rem;
   font-family: var(--font-mono);
+  font-size: 0.85rem;
+  border-radius: 3px;
 }
 
-.form-input:focus {
+.seat-input:focus {
   outline: none;
-  border-color: var(--accent-cyan);
-  box-shadow: 0 0 8px rgba(0, 229, 255, 0.3);
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
+}
+
+.pin-field {
+  background: rgba(255, 170, 0, 0.08);
+  border-color: #553e10;
 }
 
 /* BUTTONS */
-.btn-primary {
+.btn-tactical {
   background: linear-gradient(135deg, #007799 0%, #00b4d8 100%);
   color: #fff;
-  border: 1px solid var(--accent-cyan);
-  padding: 12px 24px;
-  font-size: 0.95rem;
-  font-weight: bold;
-  letter-spacing: 1px;
+  border: 1px solid var(--neon-cyan);
+  padding: 12px 28px;
+  font-family: var(--font-hud);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  border-radius: 4px;
+  border-radius: 3px;
   cursor: pointer;
   transition: all 0.2s;
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.25);
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+  gap: 10px;
 }
 
-.btn-primary:hover {
+.btn-tactical:hover {
   background: linear-gradient(135deg, #0099cc 0%, #00e5ff 100%);
-  box-shadow: 0 0 25px rgba(0, 229, 255, 0.5);
+  box-shadow: 0 0 25px rgba(0, 229, 255, 0.6);
   transform: translateY(-1px);
 }
 
 .btn-secondary {
-  background: rgba(15, 35, 58, 0.8);
-  color: var(--text-main);
-  border: 1px solid #234b7a;
-  padding: 10px 18px;
-  font-size: 0.88rem;
-  font-weight: bold;
+  background: rgba(12, 28, 48, 0.8);
+  color: var(--text-primary);
+  border: 1px solid #1b436e;
+  padding: 10px 20px;
+  font-family: var(--font-sub);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  border-radius: 4px;
+  border-radius: 3px;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .btn-secondary:hover {
-  background: rgba(25, 55, 88, 0.9);
-  border-color: var(--accent-cyan);
+  border-color: var(--neon-cyan);
+  background: rgba(18, 40, 70, 0.95);
 }
 
-/* WAR ROOM SCREEN */
-.war-room-grid {
+/* MISSION CARD (CENTERED FLOW) */
+.mission-stage-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 229, 255, 0.12);
+  border: 1px solid var(--neon-cyan);
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--neon-cyan);
+  margin-bottom: 12px;
+}
+
+.active-seat-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(0, 255, 136, 0.08);
+  border-left: 4px solid var(--neon-green);
+  padding: 12px 16px;
+  border-radius: 3px;
+  margin-bottom: 18px;
+}
+
+.active-seat-banner .callsign-text {
+  font-family: var(--font-hud);
+  font-size: 1.1rem;
+  color: #fff;
+}
+
+.active-seat-banner .role-text {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--neon-green);
+}
+
+.active-seat-banner .pin-lock-indicator {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--neon-amber);
+  background: rgba(255, 170, 0, 0.12);
+  border: 1px solid var(--neon-amber);
+  padding: 3px 8px;
+}
+
+/* CRISIS ALERT BANNER */
+.crisis-alert-banner {
+  background: rgba(255, 42, 75, 0.14);
+  border: 1px solid var(--neon-red);
+  padding: 14px 18px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  line-height: 1.45;
+  font-size: 0.92rem;
+  color: #ffccd4;
+  position: relative;
+}
+
+.crisis-alert-banner strong {
+  color: #fff;
+  font-family: var(--font-sub);
+  font-size: 1rem;
+}
+
+/* DECISION OPTIONS (GAME CARDS) */
+.decision-options-container {
   display: grid;
-  grid-template-columns: 1fr 480px;
+  grid-template-columns: 1fr 1fr;
   gap: 16px;
-  flex: 1;
-  min-height: calc(100vh - 120px);
+  margin-bottom: 20px;
 }
 
-@media (max-width: 1024px) {
-  .war-room-grid {
+@media (max-width: 768px) {
+  .decision-options-container {
     grid-template-columns: 1fr;
   }
 }
 
-/* 3D VIEWPORT */
-.viewport-card {
-  background: var(--bg-card);
-  border: 1px solid var(--bg-card-border);
-  border-radius: 6px;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  overflow: hidden;
-}
-
-.card-hud-header {
-  padding: 8px 14px;
-  background: rgba(8, 20, 35, 0.9);
-  border-bottom: 1px solid var(--bg-card-border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--accent-cyan);
-}
-
-#canvas-container {
-  flex: 1;
-  width: 100%;
-  height: 100%;
-  min-height: 420px;
-  position: relative;
-}
-
-.viewport-overlay {
-  position: absolute;
-  bottom: 12px;
-  left: 12px;
-  right: 12px;
-  pointer-events: none;
-  display: flex;
-  justify-content: space-between;
-}
-
-.telemetry-readout {
-  background: rgba(5, 12, 22, 0.85);
-  border: 1px solid var(--bg-card-border);
-  padding: 6px 10px;
-  border-radius: 3px;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--accent-green);
-}
-
-/* TACTICAL CONSOLE */
-.console-card {
-  background: var(--bg-card);
-  border: 1px solid var(--bg-card-border);
-  border-radius: 6px;
-  display: flex;
-  flex-direction: column;
-  padding: 16px;
-}
-
-.mission-stepper {
-  display: flex;
-  gap: 6px;
-  margin-bottom: 14px;
-}
-
-.step-pill {
-  flex: 1;
-  padding: 6px 4px;
-  text-align: center;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  background: rgba(14, 30, 52, 0.7);
-  border: 1px solid #1a3c63;
-  color: var(--text-dim);
-  border-radius: 3px;
-}
-
-.step-pill.active {
-  background: rgba(0, 229, 255, 0.15);
-  border-color: var(--accent-cyan);
-  color: var(--accent-cyan);
-  font-weight: bold;
-}
-
-.step-pill.completed {
-  background: rgba(0, 255, 136, 0.15);
-  border-color: var(--accent-green);
-  color: var(--accent-green);
-}
-
-.current-operator-banner {
-  background: rgba(0, 229, 255, 0.1);
-  border-left: 4px solid var(--accent-cyan);
-  padding: 10px 14px;
-  border-radius: 3px;
-  margin-bottom: 14px;
-}
-
-.banner-role {
-  font-size: 0.75rem;
-  font-family: var(--font-mono);
-  color: var(--accent-cyan);
-  text-transform: uppercase;
-}
-
-.banner-name {
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: #fff;
-}
-
-.mission-briefing {
-  background: rgba(6, 14, 25, 0.8);
-  border: 1px solid #142a44;
-  padding: 12px;
-  border-radius: 4px;
-  margin-bottom: 16px;
-  font-size: 0.88rem;
-  line-height: 1.45;
-}
-
-.briefing-alert {
-  color: var(--accent-amber);
-  font-weight: bold;
-  margin-bottom: 6px;
-  font-size: 0.85rem;
-}
-
-.tactical-decision-box {
-  margin-bottom: 16px;
-}
-
-.decision-prompt {
-  font-size: 0.9rem;
-  font-weight: bold;
-  color: #fff;
-  margin-bottom: 10px;
-}
-
-.decision-options {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.option-btn {
-  background: rgba(12, 28, 48, 0.7);
-  border: 1px solid #1a3e68;
-  color: var(--text-main);
-  padding: 12px 14px;
+.decision-card-btn {
+  background: rgba(8, 20, 36, 0.85);
+  border: 1px solid #1a3d66;
+  padding: 18px;
   border-radius: 4px;
   text-align: left;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.25s;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
 }
 
-.option-btn:hover {
-  background: rgba(18, 42, 74, 0.9);
-  border-color: var(--accent-cyan);
+.decision-card-btn:hover {
+  background: rgba(14, 32, 58, 0.95);
+  border-color: var(--neon-cyan);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
 }
 
-.option-btn.selected {
-  border-color: var(--accent-green);
-  background: rgba(0, 255, 136, 0.08);
+.decision-card-btn.selected {
+  border-color: var(--neon-green);
+  background: rgba(0, 255, 136, 0.1);
 }
 
-.option-btn.failed {
-  border-color: var(--accent-red);
-  background: rgba(255, 42, 75, 0.1);
-  animation: shake 0.4s;
+.decision-card-btn.failed {
+  border-color: var(--neon-red);
+  background: rgba(255, 42, 75, 0.15);
+  animation: cardShake 0.4s;
 }
 
-@keyframes shake {
+@keyframes cardShake {
   0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-6px); }
-  75% { transform: translateX(6px); }
+  25% { transform: translateX(-8px); }
+  75% { transform: translateX(8px); }
 }
 
-.opt-title {
-  font-size: 0.9rem;
-  font-weight: bold;
+.decision-card-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.decision-card-title {
+  font-family: var(--font-sub);
+  font-size: 1.05rem;
+  font-weight: 700;
   color: #fff;
 }
 
-.opt-desc {
-  font-size: 0.78rem;
-  color: var(--text-dim);
+.decision-card-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.4;
 }
 
-.feedback-box {
-  padding: 10px 12px;
+/* OPERATOR PIN AUTH DIALOG */
+.pin-auth-modal {
+  background: rgba(4, 10, 20, 0.95);
+  border: 1px solid var(--neon-amber);
+  padding: 16px;
   border-radius: 4px;
-  margin-bottom: 14px;
-  font-size: 0.85rem;
-  line-height: 1.4;
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.pin-auth-modal input {
+  width: 140px;
+  letter-spacing: 4px;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+/* CASUALTY & TELEMETRY HUD BAR */
+.telemetry-floating-hud {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(3, 10, 20, 0.92);
+  border: 1px solid var(--bg-card-border);
+  padding: 8px 24px;
+  border-radius: 30px;
+  display: flex;
+  gap: 24px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.8);
+}
+
+.telemetry-floating-hud strong {
+  color: var(--neon-cyan);
+}
+
+/* FEEDBACK CARD */
+.feedback-card {
+  padding: 14px 18px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  font-size: 0.88rem;
+  line-height: 1.45;
   display: none;
 }
 
-.feedback-box.error {
+.feedback-card.error {
   display: block;
-  background: rgba(255, 42, 75, 0.15);
-  border: 1px solid var(--accent-red);
-  color: #ff8598;
+  background: rgba(255, 42, 75, 0.16);
+  border: 1px solid var(--neon-red);
+  color: #ff99a8;
 }
 
-.feedback-box.success {
+.feedback-card.success {
   display: block;
-  background: rgba(0, 255, 136, 0.12);
-  border: 1px solid var(--accent-green);
-  color: #7affc0;
+  background: rgba(0, 255, 136, 0.14);
+  border: 1px solid var(--neon-green);
+  color: #9effcb;
 }
 
-/* DEBRIEFING REPORT SCREEN */
-.report-container {
-  max-width: 900px;
-  margin: 20px auto;
+/* REPORT SCREEN (HUMANIZED REPORT) */
+.report-paper {
   background: #ffffff;
   color: #111;
-  padding: 40px;
+  padding: 45px 50px;
   border-radius: 4px;
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
   font-family: "Times New Roman", Times, serif;
+  line-height: 1.4;
 }
 
-.report-header {
-  text-align: center;
-  border-bottom: 2px solid #222;
-  padding-bottom: 12px;
-  margin-bottom: 16px;
-}
-
-.report-header h2 {
+.report-paper h1 {
   font-size: 14pt;
+  text-align: center;
   text-transform: uppercase;
   margin-bottom: 4px;
 }
 
-.report-header .sub {
-  font-size: 11pt;
-  color: #444;
+.report-paper .rep-sub {
+  font-size: 10.5pt;
+  text-align: center;
+  color: #333;
+  margin-bottom: 2px;
 }
 
-.report-meta-table {
+.rep-divider {
+  border-bottom: 2px solid #222;
+  margin: 12px 0 16px 0;
+}
+
+.rep-grid-table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 20px;
-  font-size: 10pt;
-}
-
-.report-meta-table td, .report-meta-table th {
-  border: 1px solid #777;
-  padding: 6px 10px;
-}
-
-.report-meta-table th {
-  background: #f0f0f0;
-}
-
-.report-mission-item {
   margin-bottom: 16px;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 12px;
+  font-size: 9.5pt;
 }
 
-.report-mission-item h3 {
-  font-size: 11pt;
+.rep-grid-table td, .rep-grid-table th {
+  border: 1px solid #777;
+  padding: 5px 8px;
+}
+
+.rep-grid-table th {
+  background: #f0f0f0;
+  text-align: left;
+}
+
+.rep-obs-box {
+  background: #fafafa;
+  border: 1px solid #ccc;
+  padding: 10px 14px;
+  margin-bottom: 14px;
+  border-radius: 3px;
+}
+
+.rep-obs-box label {
+  display: block;
+  font-weight: bold;
+  font-size: 9.5pt;
   color: #0b3d68;
   margin-bottom: 4px;
 }
 
-.report-actions {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin: 24px 0 40px 0;
+.rep-obs-textarea {
+  width: 100%;
+  min-height: 60px;
+  padding: 6px 8px;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 9.5pt;
+  border: 1px solid #aaa;
+  border-radius: 2px;
+  resize: vertical;
 }
 
+.rep-obs-textarea:focus {
+  outline: none;
+  border-color: #0b3d68;
+}
+
+/* PRINT RULES */
 @media print {
   body {
     background: #fff !important;
     color: #000 !important;
   }
-  .top-hud, .report-actions, .screen:not(#screen-report) {
+  #canvas-container, .scanlines-overlay, .tactical-hud-bar, .telemetry-floating-hud, .report-action-bar, .screen-view:not(#screen-report) {
     display: none !important;
   }
-  .report-container {
+  .app-viewport {
+    padding-top: 0 !important;
+  }
+  .report-paper {
     box-shadow: none !important;
     padding: 0 !important;
     max-width: 100% !important;
+  }
+  .rep-obs-textarea {
+    border: none !important;
+    padding: 0 !important;
+    resize: none !important;
   }
 }
