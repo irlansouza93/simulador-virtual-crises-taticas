@@ -206,7 +206,7 @@ body[data-screen="report"] #labels { opacity: 0.4; }
 .count-picker input:focus-visible + span { outline: 3px solid var(--blue); outline-offset: 3px; }
 
 /* ---------- início ---------- */
-#s-start { grid-template-columns: minmax(0, 560px) 1fr; grid-template-rows: 1fr auto; align-items: end; gap: 24px; }
+#s-start { grid-template-columns: minmax(0, 560px) 1fr; grid-template-rows: 1fr auto; align-items: end; gap: 24px; padding-bottom: 46px; }
 .start-block {
   grid-row: 1 / span 2; align-self: end;
   background: var(--paper);
@@ -604,9 +604,14 @@ body[data-screen="report"] #labels { opacity: 0.4; }
   .circle-mark path, .success-mark path { stroke-dashoffset: 0; }
 }
 
+.credit { position: fixed; right: 14px; bottom: 10px; z-index: 12; margin: 0; padding: 4px 10px; font-size: 12px; color: var(--ink-2); background: rgba(239, 230, 207, 0.86); border: 1px solid var(--paper-3); border-radius: 2px; pointer-events: none; }
+.credit strong { font-weight: 700; color: var(--ink); }
+body[data-screen="mission"] .credit, body[data-screen="brief"] .credit { opacity: 0.7; }
+@media (max-width: 760px) { body:not([data-screen="start"]) .credit { display: none; } .credit { right: 8px; bottom: 6px; font-size: 11px; } }
+
 @media print {
   body { background: #fff; overflow: visible; }
-  #stage, #labels, .vignette, .collar, .report-actions, .toast, .loss, .pin-modal, .expired, .screen:not(#s-report) { display: none !important; }
+  #stage, #labels, .vignette, .collar, .credit, .report-actions, .toast, .loss, .pin-modal, .expired, .screen:not(#s-report) { display: none !important; }
   #ui, #s-report, .report-scroll { position: static; overflow: visible; height: auto; padding: 0; display: block !important; }
   .report { box-shadow: none; border: 0; width: 100%; padding: 0; animation: none; }
   .rep-row button, .rep-parecer button { display: none; }
