@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador Virtual de Crises Táticas: Defesa Quântica</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Three.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- jsPDF CDN for Client-Side PDF Generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+  <!-- TOP MILITARY HUD -->
+  <header class="top-hud">
+    <div class="hud-title">
+      <div class="hud-badge">CTEX // UVPR</div>
+      <h1>Simulador de Crises Táticas: Defesa Quântica</h1>
+    </div>
+    <div class="hud-meta">
+      <div><span class="status-dot"></span>SISTEMA: <strong style="color: #00ff88;">ONLINE</strong></div>
+      <div id="hud-clock">00:00:00 ZULU</div>
+      <button id="btn-toggle-sound" class="btn-secondary" style="padding: 4px 10px; font-size: 0.75rem;">🔊 SOM: ON</button>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+
+    <!-- SCREEN 1: REGISTRATION / 4 PLAYERS SETUP -->
+    <section id="screen-setup" class="screen active">
+      <div class="setup-container">
+        <div class="setup-header">
+          <h2>Credenciamento da Força-Tarefa (4 Operadores)</h2>
+          <p style="color: var(--text-dim); font-size: 0.9rem;">
+            Cada integrante assume uma função técnica indispensável na tomada de decisão da missão de resgate.
+          </p>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+          <label style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-cyan);">NOME DA EQUIPE / FORÇA-TAREFA:</label>
+          <input type="text" id="team-name-input" class="form-input" value="FORÇA-TAREFA QUÂNTICA BRASIL" style="margin-top: 4px; font-weight: bold;">
+        </div>
+
+        <div class="players-grid">
+          <!-- Player 1 -->
+          <div class="player-card">
+            <h3>Operador 1 <span class="player-role-badge">RECONHECIMENTO &bull; MISSÃO 1</span></h3>
+            <div class="form-group">
+              <label>NOME COMPLETO:</label>
+              <input type="text" id="player-name-0" class="form-input" value="Irlan Pereira de Souza">
+            </div>
+            <div class="form-group">
+              <label>E-MAIL INSTITUCIONAL:</label>
+              <input type="text" id="player-email-0" class="form-input" value="irlan.souza@eb.mil.br">
+            </div>
+            <div style="font-size: 0.72rem; color: var(--text-dim); margin-top: 4px;">
+              Especialidade: Gravimetria Quântica e Centros NV.
+            </div>
+          </div>
+
+          <!-- Player 2 -->
+          <div class="player-card">
+            <h3>Operador 2 <span class="player-role-badge">NAVEGAÇÃO TÁTICA &bull; MISSÃO 2</span></h3>
+            <div class="form-group">
+              <label>NOME COMPLETO:</label>
+              <input type="text" id="player-name-1" class="form-input" value="Diego Santana Gomes">
+            </div>
+            <div class="form-group">
+              <label>E-MAIL INSTITUCIONAL:</label>
+              <input type="text" id="player-email-1" class="form-input" value="santana.diego@eb.mil.br">
+            </div>
+            <div style="font-size: 0.72rem; color: var(--text-dim); margin-top: 4px;">
+              Especialidade: Navegação Inercial (QINS) e Bússola Atômica.
+            </div>
+          </div>
+
+          <!-- Player 3 -->
+          <div class="player-card">
+            <h3>Operador 3 <span class="player-role-badge">LOGÍSTICA &bull; MISSÃO 3</span></h3>
+            <div class="form-group">
+              <label>NOME COMPLETO:</label>
+              <input type="text" id="player-name-2" class="form-input" value="Edson Jorge dos Santos">
+            </div>
+            <div class="form-group">
+              <label>E-MAIL INSTITUCIONAL:</label>
+              <input type="text" id="player-email-2" class="form-input" value="edson.jorge@defesa.gov.br">
+            </div>
+            <div style="font-size: 0.72rem; color: var(--text-dim); margin-top: 4px;">
+              Especialidade: Computação Quântica e Otimização Combinatória.
+            </div>
+          </div>
+
+          <!-- Player 4 -->
+          <div class="player-card">
+            <h3>Operador 4 <span class="player-role-badge">GUERRA ELETRÔNICA &bull; MISSÃO 4</span></h3>
+            <div class="form-group">
+              <label>NOME COMPLETO:</label>
+              <input type="text" id="player-name-3" class="form-input" value="Cursista Convidado / Operador 4">
+            </div>
+            <div class="form-group">
+              <label>E-MAIL INSTITUCIONAL:</label>
+              <input type="text" id="player-email-3" class="form-input" value="operador4@defesa.gov.br">
+            </div>
+            <div style="font-size: 0.72rem; color: var(--text-dim); margin-top: 4px;">
+              Especialidade: Distribuição Quântica de Chaves (QKD) e OTP.
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align: center;">
+          <button id="btn-start-sim" class="btn-primary" style="padding: 14px 36px; font-size: 1rem;">
+            🚀 INICIAR OPERAÇÃO QUÂNTICA
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 2: TACTICAL WAR ROOM & 3D VIEWPORT -->
+    <section id="screen-war-room" class="screen">
+      <div class="war-room-grid">
+        
+        <!-- 3D VIEWPORT (LEFT) -->
+        <div class="viewport-card">
+          <div class="card-hud-header">
+            <div>🛰️ MAPA TOPOGRÁFICO 3D (TEATRO DE OPERAÇÕES)</div>
+            <div style="font-size: 0.72rem; color: var(--text-dim);">SENSOR VOLUMÉTRICO: ATIVO</div>
+          </div>
+          <div id="canvas-container"></div>
+          <div class="viewport-overlay">
+            <div class="telemetry-readout" id="telemetry-active-text">
+              Telemetria: Aguardando varredura inicial de área...
+            </div>
+          </div>
+        </div>
+
+        <!-- TACTICAL OPERATIONAL CONSOLE (RIGHT) -->
+        <div class="console-card">
+          <!-- Mission Stepper -->
+          <div class="mission-stepper">
+            <div class="step-pill active">M1: ABRIGO</div>
+            <div class="step-pill">M2: NAVEGAÇÃO</div>
+            <div class="step-pill">M3: ROTAS</div>
+            <div class="step-pill">M4: QKD</div>
+          </div>
+
+          <!-- Active Operator Banner -->
+          <div class="current-operator-banner">
+            <div class="banner-role" id="active-operator-role">OFICIAL DE RECONHECIMENTO</div>
+            <div class="banner-name" id="active-operator-name">Irlan Pereira de Souza</div>
+          </div>
+
+          <!-- Mission Briefing -->
+          <div class="mission-briefing">
+            <div class="briefing-alert" id="mission-title-hud">Missão 1: Localizar o Abrigo Subterrâneo Oculto</div>
+            <p id="mission-briefing-text" style="color: var(--text-dim);"></p>
+          </div>
+
+          <!-- Tactical Options Selection -->
+          <div class="tactical-decision-box">
+            <div class="decision-prompt" id="mission-prompt-text">Qual recurso técnico deve ser ativado?</div>
+            <div class="decision-options" id="options-container">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Feedback & Validation Box -->
+          <div id="decision-feedback" class="feedback-box"></div>
+
+          <!-- Next Button -->
+          <div style="text-align: right; margin-top: auto;">
+            <button id="btn-next-mission" class="btn-primary" style="display: none;">
+              PRÓXIMA MISSÃO »
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SCREEN 3: MISSION DEBRIEFING & REPORT GENERATOR -->
+    <section id="screen-report" class="screen">
+      <div class="report-container">
+        <div class="report-header">
+          <h2>Relatório Oficial de Simulação Tática: Defesa Quântica</h2>
+          <div class="sub">Projeto CÓRTEX &bull; UVPR / UEPG / Centro Tecnológico do Exército (CTEx)</div>
+          <div class="sub" style="font-size: 9.5pt; margin-top: 4px;">Curso: Princípios de Tecnologias Quânticas &bull; Módulo 2: Aplicações Quânticas 2.0</div>
+        </div>
+
+        <table class="report-meta-table">
+          <tr>
+            <th>Equipe / Força-Tarefa:</th>
+            <td id="rep-team-name">FORÇA-TAREFA QUÂNTICA BRASIL</td>
+            <th>Data de Conclusão:</th>
+            <td id="rep-date">02/11/2026</td>
+          </tr>
+          <tr>
+            <th>Status Operacional:</th>
+            <td colspan="3"><strong style="color: #0b5e28;">MISSÃO CUMPRIDA COM ÊXITO (100% EFICIÊNCIA QUÂNTICA)</strong></td>
+          </tr>
+        </table>
+
+        <h3 style="font-size: 11pt; border-bottom: 1px solid #333; padding-bottom: 3px; margin-bottom: 8px;">Célula Tática de Tomada de Decisão (4 Integrantes):</h3>
+        <table class="report-meta-table" style="margin-bottom: 16px;">
+          <thead>
+            <tr>
+              <th>Função Tática</th>
+              <th>Operador</th>
+              <th>E-mail</th>
+            </tr>
+          </thead>
+          <tbody id="rep-operators-table">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+
+        <h3 style="font-size: 11pt; border-bottom: 1px solid #333; padding-bottom: 3px; margin-bottom: 10px;">Resolução das Quatro Missões e Fundamentação Física:</h3>
+        <div id="rep-missions-summary">
+          <!-- Dynamically populated -->
+        </div>
+
+        <div style="font-size: 8.5pt; color: #555; font-style: italic; margin-top: 20px; border-top: 1px solid #ccc; padding-top: 8px; text-align: center;">
+          Documento gerado interativamente pelo Simulador Virtual de Crises Táticas (Disponível no GitHub Pages).
+        </div>
+      </div>
+
+      <div class="report-actions">
+        <button id="btn-download-pdf" class="btn-primary">
+          📥 BAIXAR RELATÓRIO EM PDF (jsPDF)
+        </button>
+        <button id="btn-print-report" class="btn-secondary">
+          🖨️ IMPRIMIR / SALVAR COMO PDF
+        </button>
+        <button id="btn-restart-sim" class="btn-secondary">
+          🔄 REINICIAR SIMULAÇÃO
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Application Logic -->
+  <script src="audio.js"></script>
+  <script src="three-scene.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
