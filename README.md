@@ -1,91 +1,55 @@
-# 🛰️ Simulador Virtual de Crises Táticas: Defesa Quântica
+# Resgate na Serra · Sala de Crise Quântica
 
-[![GitHub Pages](https://img.shields.io/badge/Deploy-GitHub%20Pages-00e5ff?style=for-the-badge&logo=github)](https://irlansouza93.github.io/simulador-virtual-crises-taticas/)
-[![Status](https://img.shields.io/badge/Status-Operacional%20%7C%20Auditado-brightgreen?style=for-the-badge)](#)
-[![Licença](https://img.shields.io/badge/Licen%C3%A7a-Exclusiva%20Militar%20/%20Educacional-blue?style=for-the-badge)](#)
-[![Projeto CÓRTEX](https://img.shields.io/badge/Projeto-C%C3%93RTEX%20--%20CTEx%20/%20UVPR-darkgreen?style=for-the-badge)](https://www.gov.br/defesa)
+Jogo de crise tática que roda direto no navegador, feito para a Atividade 3 do curso *Princípios de Tecnologias Quânticas* (Ecossistema CÓRTEX · UVPR / UEPG / CTEx).
 
-> **Ambiente Gamificado e Interativo de Simulação Tática em Guerra Eletrônica e Aplicações Quânticas 2.0.**  
-> Desenvolvido para equipes de 4 operadores cooperarem em tempo real, enfrentando cenários críticos de infiltração, sensoriamento passivo, navegação inercial sob *jamming*, otimização logística em relevo hostil e criptografia inviolável (QKD).
+**Jogar:** https://irlansouza93.github.io/simulador-virtual-crises-taticas/
 
----
+Equipes de 1 a 4 jogadores, numa tela compartilhada (por exemplo, no Google Meet), têm 45 minutos para resgatar feridos num abrigo sob a serra. O GPS está bloqueado e o inimigo escuta tudo. Em cada missão, o jogador responsável escolhe uma tecnologia e vê a decisão acontecer no mapa 3D.
 
-### 🌐 [CLIQUE AQUI PARA ACESSAR O SIMULADOR AO VIVO NO GITHUB PAGES](https://irlansouza93.github.io/simulador-virtual-crises-taticas/)
+| Missão | Função | Problema | O que acontece no mapa |
+|---|---|---|---|
+| 1. Abrigo oculto | Reconhecimento | Abrigo sob 40 m de rocha, sem poder emitir sinal | Radar triangulado e atingido pela artilharia; drone térmico abatido; gravímetro revela o abrigo em corte |
+| 2. Vale sem GPS | Navegação | Torre inimiga bloqueia o satélite | Deriva da navegação inercial clássica; spoofing do GPS; inercial quântico atravessa o vale |
+| 3. Rota contra o relógio | Logística | Deslizamentos e patrulhas sorteados a cada partida | Busca exaustiva contando combinações reais; rota planejada bloqueada; QAOA colapsa a superposição na melhor rota |
+| 4. Mensagem inviolável | Guerra Eletrônica | Fibra grampeada, *Harvest Now, Decrypt Later* | Pacotes copiados para o cofre inimigo; espectro gravado; QKD denuncia o espião pela QBER |
 
----
+## Como se joga
 
-## 🎮 Destaques da Experiência e Gamificação
+1. **Monte a equipe:** cada jogador escolhe um operador (8 personagens), digita o próprio nome e cria um PIN de 4 números.
+2. **Decida na sua vez:** só o dono da missão assume o controle, com o próprio PIN. Uma escolha errada mostra o que deu errado, desconta minutos e fica registrada.
+3. **Escreva o relatório:** ao final, cada jogador libera e assina o próprio parecer com o PIN. A conclusão da equipe é escrita em conjunto. Nada é preenchido automaticamente. Depois, é só baixar o PDF.
 
-* **Visualização Tridimensional Dinâmica (Three.js):**
-  * **Cenário de Relevo Realista:** Malha topográfica montanhosa com curvas de nível, desfiladeiros e grade tática de profundidade;
-  * **Vetor Aéreo Stealth:** Caça de 5ª geração em patrulha contínua sobre a área de operações;
-  * **Comboio Blindado Médico:** Viatura de resgate com farol direcional progressivo ao longo do terreno;
-  * **Corte Transversal do Abrigo:** Câmara subterrânea sob 40 metros de rocha ígnea, com emissão de pulsos volumétricos de gravimetria quântica;
-  * **Torre Adversária de Guerra Eletrônica:** Domo pulsante vermelho de saturação de sinal (*Jamming* de GPS);
-  * **Posto Adversário de Escuta Óptica:** Grampo em cabo de fibra óptica demonstrando a ameaça *"Harvest Now, Decrypt Later"*;
-  * **Obstáculos Dinâmicos:** Deslizamentos de rocha e corredores de patrulhas móveis com cones de alerta.
-* **Sistema Antifraude & Autonomia Operacional:**
-  * Cada operador define seu próprio **PIN de Acesso Tático (4 dígitos)** no credenciamento;
-  * Nenhuma decisão de uma missão pode ser alterada ou autenticada por outro colega sem a inserção do respectivo PIN;
-  * Geração de **Assinatura Criptográfica Individual (Hash SHA256)** para cada operador participante.
-* **Tensão e Dinâmica de Tempo Real:**
-  * **Cronômetro de Sobrevida Clínica (T-45:00 min):** Simula a janela de sobrevivência de feridos graves;
-  * **Cards de Perda e Penalidade:** Escolhas clássicas acionam alertas visuais de colapso operacional e deduzem 5 minutos de sobrevida da equipe.
-* **Relatório Oficial com Pareceres Humanos:**
-  * Ao concluir as missões, cada operador dispõe de um campo aberto para redigir seu **parecer técnico e observações pessoais em suas próprias palavras**;
-  * O relatório final gerado em PDF compila a telemetria, as leis físicas validadas e as considerações individuais autênticas dos 4 cursistas.
+## Antifraude em tela compartilhada
 
----
+- O PIN nunca é guardado em texto: fica só um hash PBKDF2 com sal por jogador. Não existe PIN mestre nem PIN padrão.
+- PINs fracos (1111, 1234…) são recusados e cada jogador precisa de um PIN diferente.
+- Três erros seguidos bloqueiam aquele jogador por 30 segundos.
+- Decisões, notas de campo e pareceres entram numa cadeia de registros SHA-256. O relatório confere cada texto, autor, decisão e credencial contra essa cadeia. Se alguém editar o histórico ou o save fora do jogo (inclusive trocando o PIN de um colega), o relatório mostra "Registro alterado" e o PIN trocado é recusado.
 
-## 👥 Célula Tática Integrada (4 Operadores)
+Limite honesto: isso impede que um colega decida ou escreva no lugar do outro durante a partida. Não é segurança contra alguém com acesso às ferramentas de desenvolvedor do navegador, já que tudo roda no próprio computador, sem servidor.
 
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                      SALA DE OPERAÇÕES CONJUNTA                        │
-├───────────────┬──────────────────────────┬─────────────────────────────┤
-│ CALLSIGN      │ ESPECIALIDADE            │ MISSÃO DESIGNADA            │
-├───────────────┼──────────────────────────┼─────────────────────────────┤
-│ 🦅 FALCÃO     │ Reconhecimento Geofísico │ Missão 1: Gravimetria e NV  │
-│ 🧭 SENTINELA  │ Navegação Autônoma       │ Missão 2: QINS e Bússola    │
-│ ⚡ ORÁCULO    │ Logística & Otimização   │ Missão 3: QAOA e Qubits     │
-│ 🔐 CIPHER     │ Guerra Eletrônica        │ Missão 4: Criptografia QKD  │
-└───────────────┴──────────────────────────┴─────────────────────────────┘
-```
-
-1. **FALCÃO (Oficial de Reconhecimento Geofísico):** Identifica o abrigo subterrâneo sob 40 metros de rocha medindo a anomalia gravitacional negativa ($\Delta \rho < 0$) através de interferometria de átomos frios, operando de modo 100% passivo.
-2. **SENTINELA (Oficial de Navegação Autônoma):** Conduz a frota sob saturação de *jamming* de GPS através do Sistema de Navegação Inercial Quântico (QINS) e Bússola Atômica com taxa de deriva quase nula.
-3. **ORÁCULO (Oficial de Logística & Otimização):** Soluciona o problema de roteamento dinâmico NP-difícil da frota sob restrições temporais e barreiras de deslizamento através de processamento quântico variacional (QAOA) com *qubits*.
-4. **CIPHER (Oficial de Guerra Eletrônica & Cripto):** Neutraliza a interceptação de dados por meio da Distribuição Quântica de Chaves (QKD) com cifra *One-Time Pad*, blindada pelo Princípio da Incerteza e pelo Teorema do Não-Clonamento.
-
----
-
-## 🛠️ Pilha Tecnológica e Fontes Livres
-
-* **Renderização 3D:** Three.js (WebGL com aceleração de hardware)
-* **Tipografia Tática:** Google Fonts (*Orbitron*, *Rajdhani*, *Share Tech Mono*, *Inter*)
-* **Síntese de Áudio:** Web Audio API (áudio procedural estéreo sem dependências de arquivos de som)
-* **Geração de PDF:** jsPDF (compilação direta no navegador)
-* **Design System:** Baseado nas diretrizes *Cyberpunk / Sci-Fi HUD* e *Dark Mode OLED* do `ui-ux-pro-max` e padrão de excelência de interface `impeccable`.
-
----
-
-## 🚀 Execução Local
+## Rodar localmente
 
 ```bash
-# Clone o repositório
-git clone https://github.com/irlansouza93/simulador-virtual-crises-taticas.git
-
-# Acesse a pasta do projeto
-cd simulador-virtual-crises-taticas
-
-# Inicie um servidor local (exemplo em Python):
 python -m http.server 8000
 ```
-Acesse `http://localhost:8000` em qualquer navegador.
 
----
+Abra http://localhost:8000. Para os testes automáticos (Node 18 ou mais recente):
 
-## 📜 Referências Científicas e Doutrinárias
+```bash
+npm test
+```
 
-* **CENTER FOR STRATEGIC AND INTERNATIONAL STUDIES (CSIS).** *Quantum Sensing and the Future of Warfare: Five Essential Reforms to Stay Competitive*. Washington, D.C., 2023.
-* **UNIVERSIDADE VIRTUAL DO PARANÁ (UVPR) / CENTRO TECNOLÓGICO DO EXÉRCITO (CTEX).** *Princípios de Tecnologias Quânticas: Aplicações Quânticas 2.0*, 2026.
+O GitHub Actions roda os mesmos testes a cada push (`.github/workflows/ci.yml`).
+
+## Estrutura
+
+- `index.html`, `css/style.css`: telas e visual (carta topográfica com calco)
+- `js/scene.js`: cena 3D em Three.js (relevo com curvas de nível, viaturas, aeronaves e sequências de cada decisão)
+- `js/routing.js`: malha viária, sorteio de deslizamentos e patrulhas, Dijkstra e contagem de rotas
+- `js/integrity.js`: PIN, bloqueio e cadeia de registros
+- `js/missions.js`: conteúdo das missões
+- `js/report.js`: relatório e PDF (jsPDF)
+- `tests/`: testes de antifraude e da simulação
+
+Fontes: Barlow, Barlow Condensed e Caveat Brush (Google Fonts, licença OFL). Bibliotecas: Three.js 0.160 e jsPDF 2.5.1, via CDN.

@@ -1,0 +1,232 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-03T15:10:00-03:00",
+  "title": "Design System: Resgate na Serra",
+  "extensions": {
+    "colorMeta": {
+      "table": { "role": "neutral", "displayName": "Table Olive", "canonical": "oklch(26.9% 0.018 131.3)", "tonalRamp": ["#0a0c09", "#242622", "#40433d", "#5e635a", "#7f847b", "#a2a79f", "#c7cac5", "#edefec"] },
+      "table-2": { "role": "neutral", "displayName": "Table Olive Light", "canonical": "oklch(31.9% 0.022 129.3)", "tonalRamp": ["#0a0c09", "#232621", "#3f443b", "#5e6458", "#7e8578", "#a2a79d", "#c7cbc3", "#edefeb"] },
+      "paper": { "role": "neutral", "displayName": "Map Paper", "canonical": "oklch(92.6% 0.032 89.1)", "tonalRamp": ["#0d0b07", "#28251d", "#474235", "#68614f", "#89826f", "#aaa596", "#cdc9be", "#f1eee8"] },
+      "paper-2": { "role": "neutral", "displayName": "Paper Shade", "canonical": "oklch(88.4% 0.044 89.9)", "tonalRamp": ["#0d0b06", "#292519", "#48412f", "#6a6147", "#8c8267", "#aca590", "#cec9ba", "#f1eee6"] },
+      "paper-3": { "role": "neutral", "displayName": "Paper Fold", "canonical": "oklch(83.6% 0.053 89.0)", "tonalRamp": ["#0e0b05", "#2a2516", "#4a412b", "#6c6041", "#8e8162", "#aea48b", "#d0c9b7", "#f2eee4"] },
+      "card-paper": { "role": "neutral", "displayName": "Card Paper", "canonical": "oklch(97.9% 0.012 91.5)", "tonalRamp": ["#0c0b0a", "#262522", "#44423d", "#63615a", "#85827b", "#a7a59f", "#cac9c5", "#efeeec"] },
+      "sepia": { "role": "tertiary", "displayName": "Relief Sepia", "canonical": "oklch(51.1% 0.089 62.8)", "tonalRamp": ["#120903", "#34200d", "#593a1d", "#81572e", "#a5784f", "#c19d7e", "#dec4ad", "#fbebde"] },
+      "sepia-2": { "role": "tertiary", "displayName": "Dark Sepia", "canonical": "oklch(43.2% 0.076 61.9)", "tonalRamp": ["#110904", "#322112", "#563c24", "#7d5837", "#a07958", "#be9e84", "#dbc4b2", "#f9ece1"] },
+      "ink": { "role": "neutral", "displayName": "Survey Ink", "canonical": "oklch(23.0% 0.004 106.7)", "tonalRamp": ["#0b0b0b", "#252524", "#424240", "#61615f", "#828280", "#a5a5a3", "#c9c9c8", "#eeeeee"] },
+      "ink-2": { "role": "neutral", "displayName": "Ink 2", "canonical": "oklch(39.5% 0.016 86.9)", "tonalRamp": ["#0c0b09", "#272521", "#44423c", "#656158", "#868279", "#a8a59e", "#cbc9c4", "#f0eeeb"] },
+      "ink-3": { "role": "neutral", "displayName": "Ink 3", "canonical": "oklch(51.5% 0.021 86.2)", "tonalRamp": ["#0c0b08", "#27251f", "#454239", "#666155", "#878276", "#a9a59b", "#ccc9c2", "#f0eeea"] },
+      "blue": { "role": "primary", "displayName": "Friendly Grease Blue", "canonical": "oklch(44.9% 0.153 261.4)", "tonalRamp": ["#030a1c", "#0f2348", "#203f79", "#325eae", "#5280d4", "#80a5e7", "#afcafa", "#e6efff"] },
+      "blue-2": { "role": "primary", "displayName": "Survey Blue", "canonical": "oklch(37.4% 0.126 261.6)", "tonalRamp": ["#040b19", "#142442", "#274170", "#3c5fa1", "#5c82c6", "#87a6dc", "#b4caf1", "#e6effe"] },
+      "blue-wash": { "role": "primary", "displayName": "Blue Wash", "canonical": "oklch(92.5% 0.018 258.4)", "tonalRamp": ["#0a0b0d", "#222529", "#3e4249", "#5c626b", "#7c838c", "#a0a5ad", "#c6c9cf", "#eceff2"] },
+      "friendly-fill": { "role": "primary", "displayName": "Friendly Frame Fill", "canonical": "oklch(89.1% 0.033 261.0)", "tonalRamp": ["#090b0f", "#21252d", "#3b424f", "#586273", "#788395", "#9da6b4", "#c3c9d4", "#ebeff5"] },
+      "red": { "role": "secondary", "displayName": "Hostile Grease Red", "canonical": "oklch(54.9% 0.190 27.8)", "tonalRamp": ["#1c0202", "#480b09", "#781915", "#ad2823", "#d55045", "#eb8377", "#fbb5ab", "#ffe9e6"] },
+      "red-2": { "role": "secondary", "displayName": "Deep Red", "canonical": "oklch(47.5% 0.165 27.8)", "tonalRamp": ["#1a0302", "#44110d", "#72221d", "#a5352e", "#cc594e", "#e3887d", "#f9b6ad", "#fee9e6"] },
+      "hostile-fill": { "role": "secondary", "displayName": "Hostile Frame Fill", "canonical": "oklch(87.1% 0.050 27.4)", "tonalRamp": ["#100908", "#30211f", "#533b38", "#795853", "#9c7974", "#ba9d99", "#d8c4c1", "#f8ebe9"] },
+      "loss-ink": { "role": "secondary", "displayName": "Loss Ink", "canonical": "oklch(97.8% 0.014 64.3)", "tonalRamp": ["#0c0b09", "#272422", "#46413d", "#67605a", "#88817a", "#aaa49f", "#ccc8c5", "#f0eeec"] },
+      "acetate": { "role": "neutral", "displayName": "Acetate", "canonical": "rgba(243, 245, 240, 0.93)" },
+      "acetate-line": { "role": "primary", "displayName": "Acetate Edge", "canonical": "rgba(31, 79, 168, 0.32)" },
+      "water": { "role": "terrain", "displayName": "Water Tint", "canonical": "oklch(63.8% 0.104 252.2)", "tonalRamp": ["#040c17", "#12263d", "#244467", "#376495", "#5886b9", "#85a8d1", "#b2ccea", "#e3f0ff"] },
+      "water-plane": { "role": "terrain", "displayName": "Water Plane", "canonical": "oklch(60.7% 0.112 253.4)", "tonalRamp": ["#030c18", "#10263f", "#22436a", "#346399", "#5585bd", "#83a8d5", "#b1ccec", "#e4f0ff"] },
+      "veg": { "role": "terrain", "displayName": "Vegetation Tint", "canonical": "oklch(85.3% 0.069 119.5)", "tonalRamp": ["#0a0c04", "#232715", "#3f4628", "#5d663d", "#7e885e", "#a1aa88", "#c6cdb5", "#edf1e3"] },
+      "road": { "role": "terrain", "displayName": "Road", "canonical": "oklch(70.3% 0.134 63.2)", "tonalRamp": ["#150800", "#391e01", "#613602", "#8c5105", "#b47029", "#ce9867", "#e8c19e", "#feebda"] },
+      "road-casing": { "role": "terrain", "displayName": "Road Casing", "canonical": "oklch(32.7% 0.018 67.1)", "tonalRamp": ["#0d0b09", "#282421", "#47413b", "#686058", "#898178", "#aaa49d", "#cdc8c3", "#f1eeeb"] },
+      "miniature-friendly": { "role": "terrain", "displayName": "Friendly Miniature", "canonical": "oklch(54.4% 0.065 262.0)", "tonalRamp": ["#070b13", "#1d2534", "#35425a", "#4f6183", "#6f83a6", "#96a6c2", "#becade", "#e8effb"] },
+      "miniature-hostile": { "role": "terrain", "displayName": "Hostile Miniature", "canonical": "oklch(51.9% 0.134 28.3)", "tonalRamp": ["#180504", "#3f1712", "#6b2b25", "#9a4238", "#c06458", "#d98f84", "#f0bab2", "#fee9e5"] },
+      "olive": { "role": "terrain", "displayName": "Olive Drab", "canonical": "oklch(49.6% 0.046 118.8)", "tonalRamp": ["#0b0c06", "#24271a", "#404531", "#5e654a", "#7f866a", "#a3a892", "#c7cbbb", "#edf0e6"] },
+      "tree": { "role": "terrain", "displayName": "Tree Green", "canonical": "oklch(58.7% 0.083 128.9)", "tonalRamp": ["#080d04", "#1f2913", "#394826", "#54693b", "#758b5b", "#9aac87", "#c1cfb4", "#eaf2e2"] },
+      "night-lamp": { "role": "terrain", "displayName": "Night Map-Light", "canonical": "oklch(68.5% 0.206 32.5)", "tonalRamp": ["#1d0100", "#4a0700", "#7c1300", "#ad2b13", "#da4b30", "#f0816a", "#ffb4a4", "#fee9e4"] },
+      "strata-floor": { "role": "terrain", "displayName": "Strata Floor", "canonical": "oklch(27.1% 0.012 78.1)", "tonalRamp": ["#0c0b0a", "#272522", "#44413d", "#65615a", "#86827b", "#a8a49f", "#cbc9c5", "#f0eeec"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "The start title block's game title only, uppercase." },
+      "loss-numeral": { "displayName": "Loss Numeral", "purpose": "Minutes lost, alone on the full-field red loss card." },
+      "headline": { "displayName": "Headline", "purpose": "Calco panel headings (40px); report head 56px, hand-off 48px, situation and PIN 30px." },
+      "title": { "displayName": "Title", "purpose": "Option card names and role names, uppercase condensed." },
+      "readout": { "displayName": "Readout", "purpose": "Survival clock and every instrument or fact value; tabular numerals with a physical unit." },
+      "button": { "displayName": "Button", "purpose": "All buttons, uppercase condensed." },
+      "label": { "displayName": "Label", "purpose": "Field labels and the sheet-step footer rule." },
+      "map-label": { "displayName": "Map Label", "purpose": "Place names projected over the terrain with a paper halo." },
+      "body": { "displayName": "Body", "purpose": "Prose; 16px under 760px." },
+      "lede": { "displayName": "Lede", "purpose": "The single situation line on the start title block, 46ch." },
+      "caption": { "displayName": "Caption", "purpose": "Definition terms, table headings and metadata, uppercase tracked." },
+      "grease": { "displayName": "Grease Pencil", "purpose": "Caveat Brush, only for marks a person drew on the acetate: loss tags, XP, Falhou, hostile/friendly map labels, rail tallies." }
+    },
+    "shadows": [
+      { "name": "sheet", "value": "0 22px 48px -18px rgba(12, 14, 9, 0.6), 0 3px 10px rgba(12, 14, 9, 0.22)", "purpose": "The one shadow for anything lying on the map: calco panels, title blocks, how-to steps, report, toast, ask bar." },
+      { "name": "dealt-card", "value": "0 10px 24px -14px rgba(12, 14, 9, 0.7), 0 2px 4px -1px rgba(12, 14, 9, 0.2)", "purpose": "Option cards at rest." },
+      { "name": "dealt-card-hover", "value": "0 22px 30px -16px rgba(12, 14, 9, 0.75), 0 2px 4px -1px rgba(12, 14, 9, 0.2)", "purpose": "Option card lifted 6px on hover." },
+      { "name": "dealt-card-selected", "value": "0 0 0 3px #1f4fa8, 0 22px 30px -16px rgba(23, 60, 130, 0.6)", "purpose": "Selected option card, lifted 8px with a blue ring." },
+      { "name": "pressed-control", "value": "0 6px 14px -6px rgba(12, 14, 9, 0.55)", "purpose": "Primary buttons and checked count tile; 0 2px 6px -3px on press." },
+      { "name": "collar", "value": "0 6px 18px -8px rgba(12, 14, 9, 0.5)", "purpose": "Map collar strip over the stage." },
+      { "name": "focus-halo", "value": "0 0 0 3px rgba(31, 79, 168, 0.22)", "purpose": "Focused inputs, with a blue border." },
+      { "name": "portrait-frame", "value": "inset 0 0 0 5px #fbf8ef, inset 0 0 0 6px rgba(31, 79, 168, 0.32)", "purpose": "Inner acetate hairline inside operator portrait frames." }
+    ],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "The single easing curve for every entrance and state change." },
+      { "name": "sheet-in", "value": "0.55s ease-out; from opacity 0, translateY(24px) rotate(-0.6deg)", "purpose": "Acetate and paper sheets laid onto the map (0.5–0.8s by surface)." },
+      { "name": "deal", "value": "0.6s ease-out, delay i*90ms+120ms; from translateY(60px) rotate((i-1)*4deg) scale(0.94)", "purpose": "Option cards dealt onto the table." },
+      { "name": "draw", "value": "stroke-dashoffset to 0, 0.7–1.1s ease-out", "purpose": "Every grease stroke: Jogar circle (1.1s after 1s), success tick (0.7s)." },
+      { "name": "wipe", "value": "0.5s ease-out; clip-path inset(0 100% 0 0) to inset(0)", "purpose": "Full-field red loss card entrance only." },
+      { "name": "hit", "value": "0.9s ease-out; red background, paper text, scale 1.12 to none", "purpose": "Survival clock time penalty." },
+      { "name": "shake", "value": "0.4s; translateX ±9px", "purpose": "Wrong PIN." },
+      { "name": "swap", "value": "0.38s ease-out; from translateX(16px) scale(0.97)", "purpose": "Operator portrait change." },
+      { "name": "fade", "value": "0.2–0.4s", "purpose": "Overlays: PIN backdrop, map key, ask bar, expired banner." },
+      { "name": "daylight-ease", "value": "uDay += (target - uDay) * 0.02 per frame; target = 0.25 + 0.75 * secondsLeft / 2700", "purpose": "Survival clock drives scene daylight and the red night map-light." },
+      { "name": "camera-sway", "value": "azimuth + sin(t * 0.05) * 0.03 rad", "purpose": "Barely perceptible drift of the relief; off under reduced motion." },
+      { "name": "js-ease", "value": "out: 1-(1-t)^3; inOut: cubic; expo: 1-2^(-10t)", "purpose": "Scene tweens for convoys, landslides, camera moves." },
+      { "name": "reduced-motion", "value": "animation 0.01ms, delay 0, transition 0.12s; strokes drawn complete; no sway or shake", "purpose": "prefers-reduced-motion: reduce." }
+    ],
+    "breakpoints": [
+      { "name": "wide", "value": "1280px" },
+      { "name": "laptop", "value": "1100px" },
+      { "name": "tablet", "value": "860px" },
+      { "name": "phone", "value": "760px" },
+      { "name": "short", "value": "max-height 760px and min-width 761px" }
+    ],
+    "terrain": {
+      "sheetSize": "128 x 128 units, base at -16, water level 1.1",
+      "contourMinor": { "interval": 1.25, "strength": 0.42, "widthPx": 1.0, "color": "{colors.sepia}" },
+      "contourMajor": { "interval": 6.25, "strength": 0.85, "widthPx": 1.7, "color": "{colors.sepia}" },
+      "utmGrid": { "interval": 10, "strength": 0.28, "widthPx": 1.0, "color": "{colors.ink}" },
+      "hillshade": "0.6 + 0.5 * clamp(dot(n, sun), 0, 1); sun dir (-0.6, 0.9, 0.4)",
+      "altitudeTint": "x1.03 at 0 to x0.90 at 34 units",
+      "vegetation": "mix(paper, veg, aVeg * 0.8)",
+      "nightTint": "col * vec3(0.82, 0.6, 0.55) * 0.7, mixed by uDay",
+      "lights": "hemisphere #fff6e2/#4a4436 at 0.45 + 1.1*day; sun #fff1d6 at 0.5 + 2.0*day; night map-light #ff5a3c at (1 - day) * 900",
+      "anomaly": "five blue concentric rings within radius, plus 0.22 blue wash",
+      "jamming": "red diagonal hatch 0.1 strength, moving; red edge ring 0.8; translucent red ringed dome",
+      "markers": "APP-6 SVG sprites at 128px, depthTest off, scale 2.6–3.4, 4–8 units above miniature",
+      "camera": "perspective 38deg, orbit distance 125, elevation 0.82"
+    }
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Friendly blue printed button for the one forward action on a sheet.",
+      "html": "<button class=\"ds-btn-primary\" type=\"button\">Executar decisão</button>",
+      "css": ".ds-btn-primary { min-height: 48px; padding: 10px 22px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 19px; letter-spacing: 0.04em; text-transform: uppercase; color: #efe6cf; background: #1f4fa8; border: 2px solid #173c82; border-radius: 3px; box-shadow: 0 6px 14px -6px rgba(12, 14, 9, 0.55); cursor: pointer; transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s, box-shadow 0.2s; } .ds-btn-primary:hover { transform: translateY(-1px); background: #2459bb; } .ds-btn-primary:active { transform: translateY(1px); box-shadow: 0 2px 6px -3px rgba(12, 14, 9, 0.55); } .ds-btn-primary:focus-visible { outline: 3px solid #1f4fa8; outline-offset: 3px; } .ds-btn-primary:disabled { background: #d7c8a2; color: #6d675a; border-color: #d7c8a2; box-shadow: none; cursor: not-allowed; transform: none; }"
+    },
+    {
+      "name": "Grease-circled Primary",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The start screen's Jogar button, circled by a red grease ellipse that draws itself in.",
+      "html": "<button class=\"ds-btn-grease\" type=\"button\"><span>Jogar</span><svg class=\"ds-circle-mark\" viewBox=\"0 0 220 90\" aria-hidden=\"true\"><path d=\"M30 18 C 80 2, 190 6, 206 38 C 220 70, 120 88, 56 80 C 10 74, 4 40, 40 22 C 60 12, 90 10, 120 12\"/></svg></button>",
+      "css": ".ds-btn-grease { position: relative; min-height: 60px; padding: 14px 44px; margin: 20px 26px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 26px; letter-spacing: 0.04em; text-transform: uppercase; color: #efe6cf; background: #1f4fa8; border: 2px solid #173c82; border-radius: 3px; box-shadow: 0 6px 14px -6px rgba(12, 14, 9, 0.55); cursor: pointer; transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s; } .ds-btn-grease span { position: relative; z-index: 1; } .ds-btn-grease:hover { transform: translateY(-1px); background: #2459bb; } .ds-btn-grease:focus-visible { outline: 3px solid #1f4fa8; outline-offset: 3px; } .ds-circle-mark { position: absolute; left: -22px; top: -16px; width: calc(100% + 44px); height: calc(100% + 32px); pointer-events: none; overflow: visible; } .ds-circle-mark path { fill: none; stroke: #c8302a; stroke-width: 4; stroke-linecap: round; stroke-dasharray: 520; stroke-dashoffset: 520; animation: ds-draw 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards; } @keyframes ds-draw { to { stroke-dashoffset: 0; } }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Paper button with an ink border for back, skip, print and secondary actions.",
+      "html": "<button class=\"ds-btn-ghost\" type=\"button\">Voltar</button>",
+      "css": ".ds-btn-ghost { min-height: 48px; padding: 10px 22px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 19px; letter-spacing: 0.04em; text-transform: uppercase; color: #1d1d1b; background: #efe6cf; border: 2px solid #1d1d1b; border-radius: 3px; cursor: pointer; transition: background 0.2s, transform 0.15s cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-ghost:hover { background: #e4d8b8; } .ds-btn-ghost:active { transform: translateY(1px); } .ds-btn-ghost:focus-visible { outline: 3px solid #1f4fa8; outline-offset: 3px; }"
+    },
+    {
+      "name": "Field",
+      "kind": "input",
+      "refersTo": "field-input",
+      "description": "Condensed uppercase label over a card-paper input with a blue focus halo.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Codinome</span><input class=\"ds-input\" type=\"text\" maxlength=\"16\"><span class=\"ds-field-hint\">Só você sabe o PIN.</span></label>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 6px; max-width: 360px; } .ds-field-label { font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase; color: #4a463d; } .ds-input { min-height: 48px; padding: 10px 14px; font-family: 'Barlow', 'Segoe UI', sans-serif; font-size: 18px; color: #1d1d1b; caret-color: #1f4fa8; background: #fbf8ef; border: 1.5px solid #4a463d; border-radius: 3px; transition: border-color 0.2s, box-shadow 0.2s; } .ds-input:hover { border-color: #1d1d1b; } .ds-input:focus, .ds-input:focus-visible { outline: none; border-color: #1f4fa8; box-shadow: 0 0 0 3px rgba(31, 79, 168, 0.22); } .ds-field-hint { font-family: 'Barlow', 'Segoe UI', sans-serif; font-size: 15px; color: #6d675a; }"
+    },
+    {
+      "name": "Role Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Toggle chip assigning an operator to a mission role; turns friendly blue when on.",
+      "html": "<label class=\"ds-chip\"><input type=\"checkbox\"><span class=\"ds-chip-face\"></span>FALCÃO</label>",
+      "css": ".ds-chip { position: relative; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 4px 12px 4px 4px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 16px; letter-spacing: 0.04em; color: #1d1d1b; background: #efe6cf; border: 1.5px solid #4a463d; border-radius: 3px; cursor: pointer; transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); } .ds-chip input { position: absolute; opacity: 0; pointer-events: none; } .ds-chip-face { width: 34px; height: 36px; background: #fbf8ef; border-radius: 2px; } .ds-chip:hover { background: #e4d8b8; } .ds-chip:has(input:checked) { background: #1f4fa8; color: #efe6cf; border-color: #173c82; } .ds-chip:has(input:focus-visible) { outline: 3px solid #1f4fa8; outline-offset: 2px; }"
+    },
+    {
+      "name": "Calco Panel",
+      "kind": "card",
+      "refersTo": "calco-panel",
+      "description": "Acetate overlay sheet with four blue registration crosses, for every transient working surface.",
+      "html": "<div class=\"ds-calco\"><div class=\"ds-reg\" aria-hidden=\"true\"></div><h2>Monte a equipe</h2><p>Com menos de 4, alguém assume mais de uma função.</p><p class=\"ds-sheet-step\">Jogador 1 de 4</p></div>",
+      "css": ".ds-calco { position: relative; width: min(480px, 100%); padding: 32px 36px 28px; color: #1d1d1b; background: rgba(243, 245, 240, 0.93); border: 1px solid rgba(31, 79, 168, 0.32); border-radius: 4px; box-shadow: 0 22px 48px -18px rgba(12, 14, 9, 0.6), 0 3px 10px rgba(12, 14, 9, 0.22); backdrop-filter: blur(3px); font-family: 'Barlow', 'Segoe UI', sans-serif; font-size: 17px; line-height: 1.5; animation: ds-sheet-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) both; } .ds-calco h2 { margin: 0 0 22px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 800; font-size: 40px; line-height: 1; letter-spacing: 0.01em; text-transform: uppercase; } .ds-calco p { margin: 0; color: #4a463d; } .ds-reg { position: absolute; inset: 8px; pointer-events: none; opacity: 0.85; --r: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='%231f4fa8' stroke-width='1.3'%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Cpath d='M12 1v22M1 12h22'/%3E%3C/g%3E%3C/svg%3E\"); background: var(--r) top left / 16px no-repeat, var(--r) top right / 16px no-repeat, var(--r) bottom left / 16px no-repeat, var(--r) bottom right / 16px no-repeat; } .ds-sheet-step { margin-top: 22px !important; padding-top: 10px; border-top: 1px solid rgba(31, 79, 168, 0.32); font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.1em; text-transform: uppercase; color: #1f4fa8 !important; } @keyframes ds-sheet-in { from { opacity: 0; transform: translateY(24px) rotate(-0.6deg); } to { opacity: 1; transform: none; } }"
+    },
+    {
+      "name": "Paper Title Block",
+      "kind": "card",
+      "refersTo": "title-block",
+      "description": "Printed paper document of record boxed in a 3px double ink rule: start block, briefing caption, report.",
+      "html": "<div class=\"ds-title-block\"><h1>Resgate<br>na Serra</h1><p>Feridos graves num abrigo sob a rocha, GPS bloqueado e o inimigo escutando tudo.</p></div>",
+      "css": ".ds-title-block { width: min(560px, 100%); padding: 34px 36px 28px; color: #1d1d1b; background: #efe6cf; border: 3px double #1d1d1b; box-shadow: 0 22px 48px -18px rgba(12, 14, 9, 0.6), 0 3px 10px rgba(12, 14, 9, 0.22); } .ds-title-block h1 { margin: 0 0 18px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 800; font-size: clamp(56px, 9vw, 96px); line-height: 0.86; letter-spacing: -0.01em; text-transform: uppercase; } .ds-title-block p { margin: 0; max-width: 46ch; font-family: 'Barlow', 'Segoe UI', sans-serif; font-size: 19px; line-height: 1.45; color: #4a463d; }"
+    },
+    {
+      "name": "Option Card",
+      "kind": "card",
+      "refersTo": "option-card",
+      "description": "Decision card dealt onto the map; lifts on hover, rings blue when selected, struck in red grease when it failed.",
+      "html": "<button class=\"ds-option\" type=\"button\" aria-pressed=\"false\"><span class=\"ds-option-key\">A</span><strong>Gravímetro quântico</strong><span class=\"ds-option-desc\">Mede a gravidade com átomos resfriados a laser. Não emite nada.</span></button>",
+      "css": ".ds-option { position: relative; display: flex; flex-direction: column; gap: 6px; width: 300px; min-height: 172px; padding: 20px 20px 22px; text-align: left; color: #1d1d1b; background: #fbf8ef; border: 1.5px solid #1d1d1b; border-radius: 4px; box-shadow: 0 10px 24px -14px rgba(12, 14, 9, 0.7), 0 2px 4px -1px rgba(12, 14, 9, 0.2); cursor: pointer; transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s, border-color 0.2s, background 0.2s; } .ds-option:hover { transform: translateY(-6px); box-shadow: 0 22px 30px -16px rgba(12, 14, 9, 0.75), 0 2px 4px -1px rgba(12, 14, 9, 0.2); } .ds-option:focus-visible { outline: 3px solid #1f4fa8; outline-offset: 3px; } .ds-option[aria-pressed=\"true\"] { transform: translateY(-8px); border-color: #1f4fa8; background: #dfe7f3; box-shadow: 0 0 0 3px #1f4fa8, 0 22px 30px -16px rgba(23, 60, 130, 0.6); } .ds-option-key { display: grid; place-items: center; width: 30px; height: 30px; margin-bottom: 4px; border: 1.5px solid #1d1d1b; border-radius: 50%; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 800; font-size: 17px; } .ds-option[aria-pressed=\"true\"] .ds-option-key { background: #1f4fa8; color: #efe6cf; border-color: #1f4fa8; } .ds-option strong { font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 24px; line-height: 1.05; text-transform: uppercase; } .ds-option-desc { font-family: 'Barlow', 'Segoe UI', sans-serif; font-size: 16px; line-height: 1.35; color: #4a463d; }"
+    },
+    {
+      "name": "Mission Rail",
+      "kind": "nav",
+      "refersTo": "collar",
+      "description": "Mission progress in the map collar, state shown as a mark: outlined square, blue flag, filled square with X, red grease tallies.",
+      "html": "<ol class=\"ds-rail\"><li class=\"ds-done\"><span class=\"ds-mark\"></span>1. Abrigo oculto <span class=\"ds-fails\">|</span></li><li class=\"ds-current\"><span class=\"ds-mark\"></span>2. Vale sem GPS</li><li><span class=\"ds-mark\"></span>3. Rota contra o relógio</li></ol>",
+      "css": ".ds-rail { list-style: none; margin: 0; padding: 8px 12px; display: flex; gap: 6px; background: #efe6cf; border-bottom: 3px double #1d1d1b; } .ds-rail li { display: flex; align-items: center; gap: 6px; padding: 6px 10px; border: 1px solid transparent; border-radius: 3px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 14px; letter-spacing: 0.03em; text-transform: uppercase; color: #6d675a; transition: background 0.3s, color 0.3s, border-color 0.3s; } .ds-mark { position: relative; flex: none; width: 16px; height: 16px; border: 2px solid currentColor; border-radius: 2px; } .ds-rail li.ds-current { color: #1f4fa8; border-color: rgba(31, 79, 168, 0.32); background: #dfe7f3; } .ds-rail li.ds-current .ds-mark { border: 0; border-radius: 0; background: #1f4fa8; clip-path: polygon(0 0, 100% 50%, 0 100%); } .ds-rail li.ds-done { color: #1d1d1b; } .ds-rail li.ds-done .ds-mark { background: #1f4fa8; border-color: #1f4fa8; } .ds-rail li.ds-done .ds-mark::before, .ds-rail li.ds-done .ds-mark::after { content: ''; position: absolute; left: 50%; top: 50%; width: 14px; height: 2.5px; background: #efe6cf; transform: translate(-50%, -50%) rotate(45deg); } .ds-rail li.ds-done .ds-mark::after { transform: translate(-50%, -50%) rotate(-45deg); } .ds-fails { font-family: 'Caveat Brush', 'Segoe Print', cursive; font-size: 18px; line-height: 1; color: #c8302a; letter-spacing: 1px; }"
+    },
+    {
+      "name": "Loss Card",
+      "kind": "custom",
+      "refersTo": "loss-card",
+      "description": "Full-field hostile red: minutes lost, one sentence, grease tags, retry. Wiped in from the left.",
+      "html": "<div class=\"ds-loss\"><p class=\"ds-loss-min\">−6 min</p><p class=\"ds-loss-text\">O drone foi detectado e o abrigo triangulado.</p><ul class=\"ds-loss-tags\"><li>assinatura de calor</li><li>emissão de rádio</li></ul><button class=\"ds-btn-loss\" type=\"button\">Tentar outra decisão</button></div>",
+      "css": ".ds-loss { display: flex; flex-direction: column; padding: 32px; color: #fff6ee; background: #c8302a; animation: ds-wipe 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; } .ds-loss-min { margin: 0 0 18px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 800; font-size: 110px; line-height: 0.85; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; } .ds-loss-text { margin: 0 0 14px; max-width: 46ch; font-family: 'Barlow', 'Segoe UI', sans-serif; font-weight: 500; font-size: 22px; line-height: 1.4; } .ds-loss-tags { list-style: none; margin: 0 0 26px; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 22px; } .ds-loss-tags li { font-family: 'Caveat Brush', 'Segoe Print', cursive; font-size: 28px; line-height: 1.2; transform: rotate(-2deg); } .ds-btn-loss { align-self: flex-start; min-height: 48px; padding: 10px 22px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 19px; letter-spacing: 0.04em; text-transform: uppercase; color: #a52520; background: #fff6ee; border: 2px solid #fff6ee; border-radius: 3px; cursor: pointer; transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s; } .ds-btn-loss:hover { background: #ffffff; transform: translateY(-1px); } .ds-btn-loss:focus-visible { outline: 3px solid #fff6ee; outline-offset: 3px; } @keyframes ds-wipe { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }"
+    },
+    {
+      "name": "APP-6 Unit Frames",
+      "kind": "custom",
+      "description": "Friendly blue rectangle and hostile red diamond over pale fills, black role glyph inside; same SVG used in the map key, role board and 3D sprites.",
+      "html": "<div class=\"ds-app6\"><svg viewBox=\"0 0 60 60\" width=\"56\" height=\"56\" aria-label=\"Força amiga\"><rect x=\"3\" y=\"12\" width=\"54\" height=\"36\" fill=\"#cfdcf2\" stroke=\"#1f4fa8\" stroke-width=\"3\"/><path d=\"M30 17 L 30 43 M 17 30 L 43 30\" stroke=\"#1d1d1b\" stroke-width=\"4\"/></svg><svg viewBox=\"0 0 60 60\" width=\"56\" height=\"56\" aria-label=\"Inimigo\"><path d=\"M30 3 L 57 30 L 30 57 L 3 30 Z\" fill=\"#f4c9c3\" stroke=\"#c8302a\" stroke-width=\"3\"/><path d=\"M14 30 C 22 20, 38 20, 46 30 C 38 40, 22 40, 14 30 Z\" fill=\"none\" stroke=\"#1d1d1b\" stroke-width=\"2.2\"/><circle cx=\"30\" cy=\"30\" r=\"4\" fill=\"#1d1d1b\"/></svg></div>",
+      "css": ".ds-app6 { display: inline-flex; gap: 16px; padding: 12px 16px; background: rgba(243, 245, 240, 0.93); border: 1px solid rgba(31, 79, 168, 0.32); border-radius: 4px; } .ds-app6 svg { display: block; transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1); } .ds-app6 svg:hover { transform: translateY(-2px); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Carta Topográfica com Calco",
+    "overview": "The whole game is the operation's map sheet. A topographic sheet in relief fills the viewport as a sand-table block: cream map paper, sepia contour lines, a black UTM grid, blue water, olive vegetation tint and low-poly miniatures sitting on the terrain. Everything the players do is laid over that sheet on acetate: translucent calco panels pinned with blue registration crosses, APP-6 unit frames, and grease-pencil marks in blue (ours) and red (theirs). Documents of record (the sheet's title block, the briefing caption, the field report) are printed paper boxed in a double ink rule.\n\nDensity is that of a working briefing table, not a dashboard: one sheet of acetate at a time, large condensed type readable across a shared Google Meet screen, and the 3D relief always visible behind. State is shown on the map before it is written: GPS jamming hatches the valley red, the gravimetric anomaly rings the shelter in blue, the survival clock dims daylight toward a red night map-light. The world refuses the neon sci-fi HUD and the side-menu quiz; there is no glow, no gradient chrome and no glass beyond the acetate's own slight blur.\n\nConsequence is total. A loss is not a toast or a modal: hostile red takes the entire field. A win is a blue grease tick drawn on acetate.",
+    "keyCharacteristics": [
+      "Full-bleed 3D relief sheet on a dark olive table, under a paper map collar along the top edge.",
+      "Two material registers: acetate calco (transient work) and paper title block (record).",
+      "Two grease pencils only: friendly blue and hostile red. No third state hue.",
+      "Three type voices: printed condensed map type, plain body prose, and hand-drawn Caveat Brush for marks a person made.",
+      "Hand-drawn SVG strokes animate in as if drawn (stroke-dashoffset), never fade in as icons.",
+      "Day-to-night lighting is driven by the survival clock, not by decoration."
+    ],
+    "rules": [
+      { "name": "The Two Pencils Rule", "body": "Blue means ours, red means theirs or lost. Nothing else carries state colour: no green for success, no amber for warning. A third state hue is a different world.", "section": "colors" },
+      { "name": "The Full-Field Red Rule", "body": "A loss commits the entire viewport to Hostile Grease Red with Loss Ink type. Red never appears as a small modal on paper for a loss.", "section": "colors" },
+      { "name": "The Paper Never Glows Rule", "body": "Night is the paper dimming, not a neon. The terrain and strata multiply toward (0.82, 0.60, 0.55) x 0.7 and a red map-light rises; nothing emits light of its own except the photons and markers the story needs.", "section": "colors" },
+      { "name": "The Three Hands Rule", "body": "Printed type (Barlow Condensed) is the map; plain type (Barlow) is the briefing; hand type (Caveat Brush) is only what someone marked on the acetate. Caveat Brush never sets instructions, buttons, headings or body copy.", "section": "typography" },
+      { "name": "The Honest Unit Rule", "body": "Every readout is a tabular numeral with its physical unit (m, dBm, μGal, %, minutes). No unitless scores, no progress percentages invented for drama.", "section": "typography" },
+      { "name": "The Sheet Stack Rule", "body": "Anything on the map is a sheet with the one Sheet shadow. Lift communicates selection; colour of the shadow never changes except the selected card's blue-tinted drop.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do put every transient working surface on an acetate calco with four registration crosses, and every document of record on paper with the 3px double ink rule.",
+      "Do keep state colour to the two grease pencils: Friendly Grease Blue for ours and success, Hostile Grease Red for hostile, loss and lost time.",
+      "Do show a mission's state on the relief first (rings, hatching, routes, markers) and in the panel second.",
+      "Do draw grease marks as SVG strokes with round caps that animate in with stroke-dashoffset.",
+      "Do set every readout in tabular condensed numerals with its physical unit.",
+      "Do mark units with APP-6 frames: blue rectangle for friendly, red diamond for hostile, black glyph inside.",
+      "Do tie scene lighting to the survival clock: daylight from 1.0 down to 0.25, with the red map-light rising as it falls.",
+      "Do keep contours sepia (minor 1.25, major 6.25 units) and the UTM grid ink at 10-unit spacing on any new terrain.",
+      "Do honour reduced motion: end states instantly, no camera sway or shake."
+    ],
+    "donts": [
+      "Don't build a neon sci-fi HUD: no glow, bloom, scanlines, cyan-on-black or glassmorphism beyond the acetate's 3px blur.",
+      "Don't turn decisions into a side-menu quiz; options are cards dealt onto the map.",
+      "Don't introduce a third state hue (green success, amber warning).",
+      "Don't set Caveat Brush on buttons, headings, instructions or body copy.",
+      "Don't paint miniatures in the grease colours; the bodies stay muted and the APP-6 marker carries the side.",
+      "Don't show a loss as a small modal or toast; it takes the whole field in red.",
+      "Don't set Hostile Grease Red as body-size text on paper; it measures 4.32:1 there and needs 18.66px bold or larger.",
+      "Don't use hard offset shadows or more than the one Sheet shadow for anything lying on the map."
+    ]
+  }
+}

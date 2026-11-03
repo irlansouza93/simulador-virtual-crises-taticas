@@ -1,0 +1,22 @@
+name: Testes
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Testes de antifraude e da simulação de rotas
+        run: npm test
+      - name: Arquivos do jogo presentes
+        run: |
+          for f in index.html css/style.css js/main.js js/scene.js js/integrity.js js/routing.js js/missions.js js/report.js js/characters.js js/audio.js; do
+            test -f "$f" || { echo "faltando: $f"; exit 1; }
+          done
